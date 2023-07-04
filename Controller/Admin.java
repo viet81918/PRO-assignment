@@ -53,7 +53,7 @@ static ArrayList<RentBook> rentBooks = ReadFile(rentBooksFilePath, RentBook.clas
     String path = System.getProperty("user.dir") + File.separator + fileName;
 
     try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
-        if (fileName.equals("books.txt")) {
+        if (fileName.equals("Books.txt")) {
             ArrayList<Book> readBooks = ReadFile(path, Book.class);
             String line;
             while ((line = reader.readLine()) != null) {
@@ -64,7 +64,7 @@ static ArrayList<RentBook> rentBooks = ReadFile(rentBooksFilePath, RentBook.clas
                 readBooks.add(book);
                 books.add(book);
             }
-        } else if (fileName.equals("customers.txt")) {
+        } else if (fileName.equals("Customer.txt")) {
             ArrayList<Customer> readCustomers = ReadFile(path, Customer.class);
             String line;
             while ((line = reader.readLine()) != null) {
@@ -75,7 +75,7 @@ static ArrayList<RentBook> rentBooks = ReadFile(rentBooksFilePath, RentBook.clas
                 readCustomers.add(customer);
                 customers.add(customer);
             }
-        } else if (fileName.equals("buyCustomers.txt")) {
+        } else if (fileName.equals("BuyCustomer.txt")) {
             ArrayList<BuyCustomer> readBuyCustomers = ReadFile(path, BuyCustomer.class);
             String line;
             while ((line = reader.readLine()) != null) {
@@ -86,7 +86,7 @@ static ArrayList<RentBook> rentBooks = ReadFile(rentBooksFilePath, RentBook.clas
                 readBuyCustomers.add(buyCustomer);
                 buyCustomers.add(buyCustomer);
             }
-        } else if (fileName.equals("rentBooks.txt")) {
+        } else if (fileName.equals("RentBook.txt")) {
             ArrayList<RentBook> readRentBooks = ReadFile(path, RentBook.class);
             String line;
             while ((line = reader.readLine()) != null) {
@@ -97,7 +97,7 @@ static ArrayList<RentBook> rentBooks = ReadFile(rentBooksFilePath, RentBook.clas
                 readRentBooks.add(rentBook);
                 rentBooks.add(rentBook);
             }
-        } else if (fileName.equals("rentCustomers.txt")) {
+        } else if (fileName.equals("RentCustomer.txt")) {
             ArrayList<RentCustomer> readRentCustomers = ReadFile(path, RentCustomer.class);
             String line;
             while ((line = reader.readLine()) != null) {
