@@ -112,8 +112,8 @@ public class Book extends Admin{
         return Dob;
     }
 
-    public void setDob(Date Dob) {
-        this.Dob = Dob;
+    public void setDob() {
+        this.Dob=Dob;
     }
     
     
