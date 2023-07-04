@@ -134,6 +134,7 @@ public class Admin {
 
     private Date parseDate(String dob) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        System.out.println("Hello, world!");
         return dateFormat.parse(dob);
     }
 }
