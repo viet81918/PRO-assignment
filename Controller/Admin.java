@@ -100,9 +100,6 @@ public class Admin {
             books.add(book);
         }
     }
-<<<<<<< Updated upstream
-    Systerm.out.println("haha");
-=======
 
     private static void addCustomers(BufferedReader reader) throws IOException {
         ArrayList<Customer> readCustomers = ReadFile("Customer.txt", Customer.class);
@@ -170,6 +167,4 @@ public class Admin {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         return dateFormat.parse(dateStr);
     }
-
->>>>>>> Stashed changes
 }
