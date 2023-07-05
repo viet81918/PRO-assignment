@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -70,71 +72,104 @@ public class Admin {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             if (fileName.equals("Books.txt")) {
-                ArrayList<Book> readBooks = ReadFile(path, Book.class);
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    // Process each line as needed
-                    // Assuming book data is comma-separated
-                    String[] data = line.split(",");
-                    Book book = new Book(data[0], data[1], data[2], data[3], data[4], Double.parseDouble(data[5]),
-                            Integer.parseInt(data[6]), Integer.parseInt(data[7]), data[8]);
-                    readBooks.add(book);
-                    books.add(book);
-                }
+                addBooks(reader);
             } else if (fileName.equals("Customer.txt")) {
-                ArrayList<Customer> readCustomers = ReadFile(path, Customer.class);
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    // Process each line as needed
-                    // Assuming customer data is comma-separated
-                    String[] data = line.split(",");
-                    Customer customer = new Customer(data[0], data[1], Integer.parseInt(data[2]),
-                            Double.parseDouble(data[3]));
-                    readCustomers.add(customer);
-                    customers.add(customer);
-                }
+                addCustomers(reader);
             } else if (fileName.equals("BuyCustomer.txt")) {
-                ArrayList<BuyCustomer> readBuyCustomers = ReadFile(path, BuyCustomer.class);
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    // Process each line as needed
-                    // Assuming buy customer data is comma-separated
-                    String[] data = line.split(",");
-                    BuyCustomer buyCustomer = new BuyCustomer(Integer.parseInt(data[0]), Double.parseDouble(data[1]));
-                    readBuyCustomers.add(buyCustomer);
-                    buyCustomers.add(buyCustomer);
-                }
+                addBuyCustomers(reader);
             } else if (fileName.equals("RentBook.txt")) {
-                ArrayList<RentBook> readRentBooks = ReadFile(path, RentBook.class);
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    // Process each line as needed
-                    // Assuming rent book data is comma-separated
-                    String[] data = line.split(",");
-                    RentBook rentBook = new RentBook(Double.parseDouble(data[0]), Integer.parseInt(data[1]), data[2],data[3]);
-                    readRentBooks.add(rentBook);
-                    rentBooks.add(rentBook);
-                }
+                addRentBooks(reader);
             } else if (fileName.equals("RentCustomer.txt")) {
-                ArrayList<RentCustomer> readRentCustomers = ReadFile(path, RentCustomer.class);
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    // Process each line as needed
-                    // Assuming rent customer data is comma-separated
-                    String[] data = line.split(",");
-                    RentCustomer rentCustomer = new RentCustomer(Integer.parseInt(data[0]),Double.parseDouble(data[1]));
-                    readRentCustomers.add(rentCustomer);
-                    rentCustomers.add(rentCustomer);
-                }
+                addRentCustomers(reader);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private Date parseDate(String dob) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        return dateFormat.parse(dob);
+    private static void addBooks(BufferedReader reader) throws IOException {
+        ArrayList<Book> readBooks = ReadFile("Books.txt", Book.class);
+        String line;
+        while ((line = reader.readLine()) != null) {
+            // Process each line as needed
+            // Assuming book data is comma-separated
+            String[] data = line.split(",");
+            Book book = new Book(data[0], data[1], data[2], data[3], data[4], Double.parseDouble(data[5]),
+                    Integer.parseInt(data[6]), Integer.parseInt(data[7]), data[8]);
+            readBooks.add(book);
+            books.add(book);
+        }
     }
+<<<<<<< Updated upstream
     Systerm.out.println("haha");
+=======
+
+    private static void addCustomers(BufferedReader reader) throws IOException {
+        ArrayList<Customer> readCustomers = ReadFile("Customer.txt", Customer.class);
+        String line;
+        while ((line = reader.readLine()) != null) {
+            // Process each line as needed
+            // Assuming customer data is comma-separated
+            String[] data = line.split(",");
+            Customer customer = new Customer(data[0], data[1], Integer.parseInt(data[2]),
+                    Double.parseDouble(data[3]));
+            readCustomers.add(customer);
+            customers.add(customer);
+        }
+    }
+
+    private static void addBuyCustomers(BufferedReader reader) throws IOException {
+        ArrayList<BuyCustomer> readBuyCustomers = ReadFile("BuyCustomer.txt", BuyCustomer.class);
+        String line;
+        while ((line = reader.readLine()) != null) {
+            // Process each line as needed
+            // Assuming buy customer data is comma-separated
+            String[] data = line.split(",");
+            BuyCustomer buyCustomer = new BuyCustomer(Integer.parseInt(data[0]), Double.parseDouble(data[1]));
+            readBuyCustomers.add(buyCustomer);
+            buyCustomers.add(buyCustomer);
+        }
+    }
+
+    private static void addRentBooks(BufferedReader reader) throws IOException {
+        ArrayList<RentBook> readRentBooks = ReadFile("RentBook.txt", RentBook.class);
+        String line;
+        while ((line = reader.readLine()) != null) {
+            // Process each line as needed
+            // Assuming rent book data is comma-separated
+            String[] data = line.split(",");
+            RentBook rentBook = new RentBook(Double.parseDouble(data[0]), Integer.parseInt(data[1]), data[2], data[3]);
+            readRentBooks.add(rentBook);
+            rentBooks.add(rentBook);
+        }
+    }
+
+    private static void addRentCustomers(BufferedReader reader) throws IOException {
+        ArrayList<RentCustomer> readRentCustomers = ReadFile("RentCustomer.txt", RentCustomer.class);
+        String line;
+        while ((line = reader.readLine()) != null) {
+            // Process each line as needed
+            // Assuming rent customer data is comma-separated
+            String[] data = line.split(",");
+            RentCustomer rentCustomer = new RentCustomer(Integer.parseInt(data[0]), Double.parseDouble(data[1]));
+            readRentCustomers.add(rentCustomer);
+            rentCustomers.add(rentCustomer);
+        }
+    }
+
+    public static void setDayRentBook(RentBook book, String date) {
+        try {
+            Date rentalDate = parseDate(date);
+            book.setNgayThueSach(rentalDate);
+        } catch (ParseException ex) {
+            java.util.logging.Logger.getLogger(Customer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }
+
+    private static Date parseDate(String dateStr) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        return dateFormat.parse(dateStr);
+    }
+
+>>>>>>> Stashed changes
 }
