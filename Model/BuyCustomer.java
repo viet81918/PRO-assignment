@@ -4,9 +4,11 @@ public class BuyCustomer extends Customer {
      private int BuyBookNumber;
     double BuyCost;
     
-    public BuyCustomer(int BuyBookNumber, double BuyCost){
+    public BuyCustomer(String ID,int BuyBookNumber, double BuyCost){
+        this.ID=ID;
         this.BuyBookNumber=BuyBookNumber;
         this.BuyCost=BuyCost;
+        
     }
     @Override
     public int getBookNumber(){
@@ -28,10 +30,10 @@ public class BuyCustomer extends Customer {
     }
      @Override
     public String toString() {
-    return "Rent Customer{" +
+    return "Buy Customer{" +
             "ID='" + ID +
-            ", Số sách dã mua='" + BookNumber +
-            ", Tiền sách mua='" + Cost  +
+            ", Số sách dã mua='" + BuyBookNumber +
+            ", Tiền sách mua='" + BuyCost  +
             '}';
     }
     

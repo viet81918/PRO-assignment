@@ -1,7 +1,6 @@
 
 package Model;
 
-import Controller.Admin;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Scanner;
 
-public class Book extends Admin{
+public class Book {
     Scanner scanner = new Scanner(System.in);
     String TheLoai;
     String BookName;
@@ -24,8 +23,7 @@ public class Book extends Admin{
     public Book(){
         super();
     }
-
-    public Book (String TheLoai,String BookName, String AuthorName,String HookID,String Review, double Price,int SoldBookNumber, int UnsoldBookNumber, String Dob) {
+    public Book (String TheLoai,String BookName, String AuthorName,String BookID, double Price, String Dob,int SoldBookNumber, int UnsoldBookNumber,String Review) {
         super();
         this.TheLoai = TheLoai;
         this.BookName=BookName;
@@ -42,7 +40,7 @@ public class Book extends Admin{
         }
     }
      private Date parseDate(String dob) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             return dateFormat.parse(dob);
      }
     public String getTheLoai() {
@@ -121,7 +119,7 @@ public class Book extends Admin{
     
     @Override
     public String toString() {
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     String dobString = dateFormat.format(Dob);
     return "Book(" +
             "The loai='" + TheLoai +

@@ -16,21 +16,29 @@ public class RentBook extends Book {
     
     
  
-    public RentBook(double RentPrice,int BookNumber, String NgayThueSach, String NgayTraSach) {
-        
-        this.RentPrice=RentPrice;
-        this.BookNumber=BookNumber;
-         try {
-            this.NgayThueSach = parseDate(NgayThueSach);
-            this.NgayTraSach = parseDate(NgayTraSach);
-        } catch (ParseException ex) {
-            Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public RentBook(String TheLoai, String BookName, String AuthorName, String BookID, double RentPrice, int BookNumber, String Dob, String NgayThueSach, String NgayTraSach) {
+    this.TheLoai = TheLoai;
+    this.BookName = BookName;
+    this.AuthorName = AuthorName;
+    this.BookID = BookID;
+    this.RentPrice = RentPrice;
+    this.BookNumber = BookNumber;
+    
+    try {
+        this.Dob = parseDate(Dob);
+        this.NgayThueSach = parseDate(NgayThueSach);
+        this.NgayTraSach = parseDate(NgayTraSach);
+    } catch (ParseException ex) {
+        Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
     }
-    private Date parseDate(String NgayThueSach) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-            return dateFormat.parse(NgayThueSach);
-     }
+}
+
+private Date parseDate(String dateString) throws ParseException {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    return dateFormat.parse(dateString);
+}
+
+
     public int getBookNumber(){
         return BookNumber;
     }

@@ -1,7 +1,6 @@
 package Model;
 
-import Controller.Admin;
-public class Customer extends Admin{
+public class Customer {
     String ID;
     String Review;
     int BookNumber;
@@ -12,7 +11,7 @@ public class Customer extends Admin{
     }
     
 
-    public Customer(String ID,String Review, int BookNumber, double Cost ) {
+    public Customer(String ID, int BookNumber, double Cost ,String Review) {
         super();
         this.ID = ID;
         this.BookNumber=BookNumber;

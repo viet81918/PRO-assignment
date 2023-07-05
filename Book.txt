@@ -1,0 +1,4 @@
+Thieu Nhi;Cho toi mot ve di tuoi tho;Nguyen Nhat Anh; MS1800; 190.000; 12/07/2020;20;10; Day la cuon sach viet ve tuoi tho nen doc
+Khoa Hoc; Ubik; Philip K. Dick; MS1801; 345.000; 18/05/2005;8;7; voi ngoi but thien tai, tac pham Ubik se khong lam ban that vong
+Lich Su; Lich Su Viet Nam; Dao Duy Anh; MS1802; 120.000; 05/05/1949;5;5; Sach trinh bay nhung chi tiet lich su cua Viet Nam qua nhieu thoi ki mot cach chi tiet
+Kinh Di; IT; Stephen King; MS1803; 210.000; 02/03/1986;12;8; Cuon sach co vo so tinh tiet ron toc gay, khien ban khong the roi mat khi doc
