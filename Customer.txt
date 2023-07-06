@@ -1,3 +1,0 @@
-KH001;5; 490.000; Tiem sach Viet Nguyen co chat luong phuc vu tot
-KH002;3; 395.000; Co nhieu sach hay o tiem sach
-KH003;2; 280.000; Se ung ho shop trong thoi gian toi

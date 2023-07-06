@@ -1,2 +1,2 @@
-KH001;1;190000
-KH003;2;240000
+KH001;1;190000; Tiem sach Viet Nguyen co chat luong phuc vu nhu dau buoi
+KH003;2;240000; Se ung ho shop trong thoi gian toi
