@@ -128,7 +128,7 @@ private static void addRentCustomers(BufferedReader reader) throws IOException {
     public static void setDayRentBook(RentBook book, String date) {
         try {
             Date rentalDate = parseDate(date);
-            book.setNgayThueSach(rentalDate);
+            book.setRentDay(rentalDate);
         } catch (ParseException ex) {
             java.util.logging.Logger.getLogger(Customer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }

@@ -25,14 +25,14 @@ public class RentCustomer extends Customer {
 
     @Override
     public void setCost(double RentCost){
-        this.Cost=RentCost;
+        this.RentCost=RentCost;
     }
      @Override
     public String toString() {
     return "Rent Customer{" +
-            "ID='" + ID +
-            ", Số sách dã thuê='" + RentBookNumber +
-            ", Tiền sách thuê='" + RentCost  +
+            "Customer's ID: " + ID +
+            ", Number of rent books: " + RentBookNumber +
+            ", Price of rent books: " + RentCost  +
             '}';
     }
 }

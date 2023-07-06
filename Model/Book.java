@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Book {
     Scanner scanner = new Scanner(System.in);
-    String TheLoai;
+    String BookType;
     String BookName;
     String AuthorName;
     String BookID;
@@ -23,9 +23,9 @@ public class Book {
     public Book(){
         super();
     }
-    public Book (String TheLoai,String BookName, String AuthorName,String BookID, double Price, String Dob,int SoldBookNumber, int UnsoldBookNumber,String Review) {
+    public Book (String BookType,String BookName, String AuthorName,String BookID, double Price, String Dob,int SoldBookNumber, int UnsoldBookNumber,String Review) {
         super();
-        this.TheLoai = TheLoai;
+        this.BookType = BookType;
         this.BookName=BookName;
         this.AuthorName = AuthorName;
         this.Price = Price;
@@ -43,12 +43,12 @@ public class Book {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             return dateFormat.parse(dob);
      }
-    public String getTheLoai() {
-        return TheLoai ;
+    public String getBookType() {
+        return BookType ;
     }
 
-    public void setTheLoai(String TheLoai) {
-        this.TheLoai = TheLoai;
+    public void setBookType(String BookType) {
+        this.BookType = BookType;
     }
     
     public String getBookName() {
@@ -121,16 +121,16 @@ public class Book {
     public String toString() {
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     String dobString = dateFormat.format(Dob);
-    return "Book(" +
-            "The loai='" + TheLoai +
-            "Book Name='" + BookName +
-            ", Author Name='" + AuthorName +
-             ", Book ID ='" + BookID +
-            ", Price='" + Price  +
-            ", Day of production='" + dobString  +
-            ", So luong da ban='" + SoldBookNumber +
-            ", So luong trong kho='" + UnsoldBookNumber +
-            ", Review sach='" + Review +
+    return "Book {" +
+            "Type of book: " + BookType +
+            "Book's Name: " + BookName +
+            ", Author's Name: " + AuthorName +
+            ", Book ID: " + BookID +
+            ", Price: " + Price  +
+            ", Day of production: " + dobString  +
+            ", Number of sold books: " + SoldBookNumber +
+            ", Number of unsold books: " + UnsoldBookNumber +
+            ", Customer's reivew: " + Review +
             '}';
 }
 
