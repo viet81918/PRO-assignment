@@ -1,6 +1,7 @@
 package Model;
 
-public class Customer {
+import Controller.Admin;
+public abstract class Customer extends Admin{
     String ID;
     String Review;
     int BookNumber;
@@ -11,7 +12,7 @@ public class Customer {
     }
     
 
-    public Customer(String ID, int BookNumber, double Cost ,String Review) {
+    public Customer(String ID,String Review, int BookNumber, double Cost ) {
         super();
         this.ID = ID;
         this.BookNumber=BookNumber;
@@ -34,13 +35,14 @@ public class Customer {
         this.BookNumber=BookNumber;
     }
 
-    public double getCost() {
+    public double getCost(){
         return Cost;
-    }
-
+    } 
+    
     public void setCost(double Cost){
         this.Cost=Cost;
     }
+
     public String getReview(){
         return Review;
     }
@@ -53,11 +55,11 @@ public class Customer {
 
     @Override
     public String toString() {
-    return "Customer{" +
-            "ID='" + ID +
-            ", Số sách='" + BookNumber +
-            ", Tiền sách='" + Cost  +
-            ", Review ='" + Review  +
+    return "Customer {" +
+            "ID: " + ID +
+            ", Number of books: " + BookNumber +
+            ", Paid price for books: " + Cost  +
+            ", Customer's review: " + Review  +
             '}';
     }
 
