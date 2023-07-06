@@ -58,7 +58,7 @@ private Date parseDate(String dateString) throws ParseException {
     public void setRentDay(Date RentDay) {
         this.RentDay = RentDay;
     }
-      public Date getNgayTraach() {
+      public Date getReturnDay() {
         return ReturnDay;
     }
 
