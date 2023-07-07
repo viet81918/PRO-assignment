@@ -165,4 +165,19 @@ public class Admin {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         return dateFormat.parse(dateStr);
     }
+     public void FindBook(){
+        books.stream().filter(doc -> doc instanceof Book).forEach(doc -> System.out.println(doc.toString()));
+    }
+    public void FindCustomer() {
+        customers.stream().filter(doc -> doc instanceof Customer).forEach(doc -> System.out.println(doc.toString()));
+    }
+    public void FindRentBook() {
+        rentBooks.stream().filter(doc -> doc instanceof RentBook).forEach(doc -> System.out.println(doc.toString()));
+    }
+    public void FindRentCustomer() {
+        rentCustomers.stream().filter(doc -> doc instanceof RentCustomer).forEach(doc -> System.out.println(doc.toString()));
+    }
+    public void FindBuyCustomer() {
+        buyCustomers.stream().filter(doc -> doc instanceof BuyCustomer).forEach(doc -> System.out.println(doc.toString()));
+    }
 }
