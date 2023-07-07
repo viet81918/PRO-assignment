@@ -44,22 +44,22 @@ public class Admin {
     }
 
     public static void addReadObject(String fileName) {
-    String path = System.getProperty("user.dir") + File.separator + fileName;
+        String path = System.getProperty("user.dir") + File.separator + fileName;
 
-    try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
-        if (fileName.equals("Book.txt")) {
-            addBooks(reader);
-        } else if (fileName.equals("BuyCustomer.txt")) {
-            addBuyCustomers(reader);
-        } else if (fileName.equals("RentBook.txt")) {
-            addRentBooks(reader);
-        } else if (fileName.equals("RentCustomer.txt")) {
-            addRentCustomers(reader);
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+            if (fileName.equals("Book.txt")) {
+                addBooks(reader);
+            } else if (fileName.equals("BuyCustomer.txt")) {
+                addBuyCustomers(reader);
+            } else if (fileName.equals("RentBook.txt")) {
+                addRentBooks(reader);
+            } else if (fileName.equals("RentCustomer.txt")) {
+                addRentCustomers(reader);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    } catch (IOException e) {
-        e.printStackTrace();
     }
-}
 
 
     private static void addBooks(BufferedReader reader) throws IOException {
@@ -89,34 +89,34 @@ public class Admin {
     }
 
     private static void addBuyCustomers(BufferedReader reader) throws IOException {
-    ArrayList<BuyCustomer> readBuyCustomers = ReadFile("BuyCustomer.txt", BuyCustomer.class);
-    String line;
-    while ((line = reader.readLine()) != null) {
-        // Process each line as needed
-        // Assuming buy customer data is comma-separated
-        String[] data = line.split(";");
-        BuyCustomer buyCustomer = new BuyCustomer(data[0], Integer.parseInt(data[1]), Double.parseDouble(data[2]),
-                data[3]);
-        readBuyCustomers.add(buyCustomer);
-        customers.add(buyCustomer);
-        buyCustomers.add(buyCustomer);
+        ArrayList<BuyCustomer> readBuyCustomers = ReadFile("BuyCustomer.txt", BuyCustomer.class);
+        String line;
+        while ((line = reader.readLine()) != null) {
+            // Process each line as needed
+            // Assuming buy customer data is comma-separated
+            String[] data = line.split(";");
+            BuyCustomer buyCustomer = new BuyCustomer(data[0], Integer.parseInt(data[1]), Double.parseDouble(data[2]),
+                    data[3]);
+            readBuyCustomers.add(buyCustomer);
+            customers.add(buyCustomer);
+            buyCustomers.add(buyCustomer);
+        }
     }
-}
 
-private static void addRentCustomers(BufferedReader reader) throws IOException {
-    ArrayList<RentCustomer> readRentCustomers = ReadFile("RentCustomer.txt", RentCustomer.class);
-    String line;
-    while ((line = reader.readLine()) != null) {
-        // Process each line as needed
-        // Assuming rent customer data is comma-separated
-        String[] data = line.split(";");
-        RentCustomer rentCustomer = new RentCustomer(data[0], Integer.parseInt(data[1]),
-                Double.parseDouble(data[2]), data[3]);
-        readRentCustomers.add(rentCustomer);
-        customers.add(rentCustomer);
-        rentCustomers.add(rentCustomer);
+    private static void addRentCustomers(BufferedReader reader) throws IOException {
+        ArrayList<RentCustomer> readRentCustomers = ReadFile("RentCustomer.txt", RentCustomer.class);
+        String line;
+        while ((line = reader.readLine()) != null) {
+            // Process each line as needed
+            // Assuming rent customer data is comma-separated
+            String[] data = line.split(";");
+            RentCustomer rentCustomer = new RentCustomer(data[0], Integer.parseInt(data[1]),
+                    Double.parseDouble(data[2]), data[3]);
+            readRentCustomers.add(rentCustomer);
+            customers.add(rentCustomer);
+            rentCustomers.add(rentCustomer);
+        }
     }
-}
 
 
 
@@ -134,31 +134,31 @@ private static void addRentCustomers(BufferedReader reader) throws IOException {
     }
 
     public static void main(String[] args) throws Exception {
-    addReadObject("RentCustomer.txt");
-    addReadObject("BuyCustomer.txt");
-    addReadObject("Book.txt");
-    addReadObject("RentBook.txt");
+        addReadObject("RentCustomer.txt");
+        addReadObject("BuyCustomer.txt");
+        addReadObject("Book.txt");
+        addReadObject("RentBook.txt");
 
-    System.out.println("Rent Customers:");
-    for (RentCustomer rentCustomer : rentCustomers) {
-        System.out.println(rentCustomer.toString());
-    }
+        System.out.println("Rent Customers:");
+        for (RentCustomer rentCustomer : rentCustomers) {
+            System.out.println(rentCustomer.toString());
+        }
 
-    System.out.println("Buy Customers:");
-    for (BuyCustomer buyCustomer : buyCustomers) {
-        System.out.println(buyCustomer.toString());
-    }
+        System.out.println("Buy Customers:");
+        for (BuyCustomer buyCustomer : buyCustomers) {
+            System.out.println(buyCustomer.toString());
+        }
 
-    System.out.println("Books:");
-    for (Book book : books) {
-        System.out.println(book.toString());
-    }
+        System.out.println("Books:");
+        for (Book book : books) {
+            System.out.println(book.toString());
+        }
 
-    System.out.println("Rent Books:");
-    for (RentBook rentBook : rentBooks) {
-        System.out.println(rentBook.toString());
+        System.out.println("Rent Books:");
+        for (RentBook rentBook : rentBooks) {
+            System.out.println(rentBook.toString());
+        }
     }
-}
 
 
     private static Date parseDate(String dateStr) throws ParseException {
