@@ -50,8 +50,6 @@ public class Customer extends Admin{
         this.Review=Review;
     }
 
-
-
     @Override
     public String toString() {
     return "Customer{" +

@@ -9,20 +9,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Scanner;
 
-public class Book extends Admin{
-    Scanner scanner = new Scanner(System.in);
-    String TheLoai;
-    String BookName;
-    String AuthorName;
-    String BookID;
-    String Review;
-    double Price;
-    int SoldBookNumber;
-    int UnsoldBookNumber;
-    Date Dob;
+public class Book {
+    static Scanner scanner = new Scanner(System.in);
+    private String TheLoai;
+    private String BookName;
+    private String AuthorName;
+    private String BookID;
+    private String Review;
+    private double Price;
+    private int SoldBookNumber;
+    private int UnsoldBookNumber;
+    private Date Dob;
     
     public Book(){
-        super();
+        
     }
 
     public Book (String TheLoai,String BookName, String AuthorName,String HookID,String Review, double Price,int SoldBookNumber, int UnsoldBookNumber, String Dob) {

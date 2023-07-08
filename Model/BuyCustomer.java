@@ -28,7 +28,7 @@ public class BuyCustomer extends Customer {
     }
      @Override
     public String toString() {
-    return "Rent Customer{" +
+    return "Buy Customer{" +
             "ID='" + ID +
             ", Số sách dã mua='" + BookNumber +
             ", Tiền sách mua='" + Cost  +
