@@ -2,9 +2,9 @@ package Model;
 
 
 public abstract class Customer {
-    protected static String ID;
-    protected static String Review;
-    protected static int  BookNumber;
+    private String ID;
+    private String Review;
+    private  int  BookNumber;
     
     
     public Customer(){
@@ -50,7 +50,6 @@ public abstract class Customer {
     return "Customer {" +
             "ID: " + ID +
             ", Number of books used: " + BookNumber +
-            
             ", Customer's review: " + Review  +
             '}';
     }

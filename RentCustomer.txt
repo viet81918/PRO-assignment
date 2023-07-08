@@ -1,2 +1,2 @@
-KH001;2; Tiem sach Viet Nguyen co chat luong phuc vu tot;1;120.000
+KH001;2; Tiem sach Viet Nguyen co chat luong phuc vu tot;2;120.000
 KH002;1; Co nhieu sach hay o tiem sach;1;105.000

@@ -9,17 +9,25 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class RentBook extends Book {
-    protected double RentPrice;
+    private double RentPrice;
     private Date RentDay;
     private Date ReturnDay;
-    protected int RentBookNumber;
+    private int RentBookNumber;
     
     public RentBook(){
         
     }
+    public RentBook(double RentPrice) {
+        
+        this.RentPrice = RentPrice;
+        
+    }
+    public RentBook(int RentBookNumber) {
+        this.RentBookNumber = RentBookNumber;
+    }
     
  
-    public RentBook(String BookType, String BookName, String AuthorName, String BookID, Date Dob, double RentPrice, int RentBookNumber, String RentDay, String ReturnDay) {
+    public RentBook(String BookType, String BookName, String AuthorName, String BookID, double Price , Date Dob, String Review , int BookNumber, double RentPrice, int RentBookNumber, String RentDay, String ReturnDay) {
     super(BookType, BookName, AuthorName, BookID, Price, Dob, Review, BookNumber);
     this.RentPrice = RentPrice;
     this.RentBookNumber=RentBookNumber;
@@ -51,7 +59,7 @@ private Date parseDate(String dateString) throws ParseException {
         return RentPrice;
     }
     public void setRentPrice(double RentPrice){
-        this.RentPrice=RentBookNumber*(Price-70/100);
+        this.RentPrice=RentBookNumber*(getPrice()-70/100);
     }
       public Date getRentDay() {
         return RentDay;
@@ -70,7 +78,7 @@ private Date parseDate(String dateString) throws ParseException {
    
   @Override
     public String toString() {
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     
     String dateString = dateFormat.format(RentDay);
     String dateString1 = dateFormat.format(ReturnDay);

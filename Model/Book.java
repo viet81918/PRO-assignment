@@ -7,27 +7,27 @@ import java.util.Scanner;
 
 public abstract class Book {
     Scanner scanner = new Scanner(System.in);
-    protected static int BookNumber;
+    private int BookNumber;
     private String BookType;
     private String BookName;
     private String AuthorName;
     private String BookID;
-    protected static String Review;
-    protected static double Price;
-    protected static Date Dob;
+    private  String Review;
+    private  double Price;
+    private Date Dob;
     
     public Book(){
         super();
     }
     public Book (String BookType,String BookName, String AuthorName,String BookID, double Price, Date Dob, String Review, int BookNumber) {
         super();
-        Book.BookNumber=BookNumber;
+        this.BookNumber=BookNumber;
         this.BookType = BookType;
         this.BookName=BookName;
         this.AuthorName = AuthorName;
-        Book.Price = Price;
+        this.Price = Price;
         this.BookID = BookID;
-        Book.Review=Review;
+        this.Review=Review;
         this.Dob = Dob;
         
     }

@@ -1,9 +1,9 @@
 package Model;
 
 public class RentCustomer extends Customer {
-    RentBook rb = new RentBook();
-    protected static int RentBookNumber;
-    protected static double RentPrice;
+    
+    private  int RentBookNumber;
+    private double RentPrice;
     
     
     public RentCustomer(String ID, int BookNumber,String Review, int RentBookNumber, double RentPrice){
@@ -11,25 +11,34 @@ public class RentCustomer extends Customer {
         this.RentBookNumber=RentBookNumber;
         this.RentPrice=RentPrice;
     }
+    
+    
+
+     public int getRentBookNumber() {
+        return RentBookNumber;
+    }
+
+
+
+    public void setRentBookNumber(int rentBookNumber) {
+        RentBookNumber = rentBookNumber;
+    }
+
+
+
     public double getRentPrice() {
-        return rb.getRentPrice();
+        return RentPrice;
     }
 
-    public void setRentPrice(double RentPrice) {
-        this.RentPrice=RentPrice;
+
+
+    public void setRentPrice(double rentPrice) {
+        RentPrice = rentPrice;
     }
 
-    public int getRentBookNumber() {
-        return rb.getRentBookNumber();
-    }
 
-    public void setRentBookNumber(int RentBookNumber) {
-        this.RentBookNumber = RentBookNumber;
-    }
-    
-    
 
-     @Override
+    @Override
     public String toString() {
     return "Rent Customer{" +
             super.toString() +
