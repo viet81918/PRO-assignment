@@ -1,26 +1,24 @@
 package Model;
 
+
 public abstract class Customer {
-    String ID;
-    String Review;
-    int BookNumberRent;
-    int BookNumberBuy;
-    double Cost;
+    protected static String ID;
+    protected static String Review;
+    protected static int  BookNumber;
+    
     
     public Customer(){
         super();
     }
     
 
-   public Customer(String ID, String Review, int BookNumberRent, int BookNumberBuy, double Cost) {
-    this.ID = ID;
-    this.Review = Review;
-    this.BookNumberRent = BookNumberRent;
-    this.BookNumberBuy = BookNumberBuy;
-    this.Cost = Cost;
-}
-
-
+    public Customer(String ID, int BookNumber,String Review) {
+        super();
+        this.ID = ID;
+        this.BookNumber=BookNumber;
+        this.Review=Review;
+             
+    }
     public String getID() {
         return ID;
     }
@@ -29,29 +27,15 @@ public abstract class Customer {
         this.ID = ID;
     }
 
-    public int getBookNumberRent() {
-        return BookNumberRent;
-    }
-    
-    public void setBookNumberRent(int BookNumberRent){
-        this.BookNumberRent=BookNumberRent;
-    }
-    
-    public int getBookNumberBuy(){
-        return BookNumberBuy;
+    public int getBookNumber() {
+        return BookNumber;
     }
 
-    public void setBookNumberBuy(int BookNumberBuyu) {
-        this.BookNumberBuy=BookNumberBuy;
+    public void setBookNumber(int BookNumber) {
+        this.BookNumber=BookNumber;
     }
 
-    public double getCost(){
-        return Cost;
-    } 
     
-    public void setCost(double Cost){
-        this.Cost=Cost;
-    }
 
     public String getReview(){
         return Review;
@@ -60,35 +44,16 @@ public abstract class Customer {
     public void setReview(String Review){
         this.Review=Review;
     }
-<<<<<<< HEAD
 
-    @Override
+   @Override
     public String toString() {
-    return "Customer{" +
-            "ID='" + ID +
-            ", Số sách='" + BookNumber +
-            ", Tiền sách='" + Cost  +
-            ", Review ='" + Review  +
+    return "Customer {" +
+            "ID: " + ID +
+            ", Number of books used: " + BookNumber +
+            
+            ", Customer's review: " + Review  +
             '}';
-=======
-@Override
-public String toString() {
-    String customerType = "Customer";
-    if (this instanceof RentCustomer) {
-        customerType = "RentCustomer";
-    } else if (this instanceof BuyCustomer) {
-        customerType = "BuyCustomer";
->>>>>>> 3c1c3244e7fac1aca3b9642b9d272c23ea09a98d
     }
-
-    return customerType + " {ID: " + ID +
-            ", Number of rentbooks: " + BookNumberRent +
-            ", Number of buybooks: " + BookNumberBuy +
-            ", Paid price for books: " + Cost +
-            ", Customer's review: " + Review +
-            "}";
 }
 
-
-}
 

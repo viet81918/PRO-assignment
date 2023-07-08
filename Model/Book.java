@@ -1,61 +1,46 @@
 
 package Model;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.Scanner;
 
-public class Book {
-<<<<<<< HEAD
-    static Scanner scanner = new Scanner(System.in);
-    private String TheLoai;
+public abstract class Book {
+    Scanner scanner = new Scanner(System.in);
+    protected static int BookNumber;
+    private String BookType;
     private String BookName;
     private String AuthorName;
     private String BookID;
-    private String Review;
-    private double Price;
-    private int SoldBookNumber;
-    private int UnsoldBookNumber;
-    private Date Dob;
-=======
-    Scanner scanner = new Scanner(System.in);
-    String BookType;
-    String BookName;
-    String AuthorName;
-    String BookID;
-    String Review;
-    double Price;
-    int SoldBookNumber;
-    int UnsoldBookNumber;
-    Date Dob;
->>>>>>> 3c1c3244e7fac1aca3b9642b9d272c23ea09a98d
+    protected static String Review;
+    protected static double Price;
+    protected static Date Dob;
     
     public Book(){
-        
-    }
-    public Book (String BookType,String BookName, String AuthorName,String BookID, double Price, String Dob,int SoldBookNumber, int UnsoldBookNumber,String Review) {
         super();
+    }
+    public Book (String BookType,String BookName, String AuthorName,String BookID, double Price, Date Dob, String Review, int BookNumber) {
+        super();
+        Book.BookNumber=BookNumber;
         this.BookType = BookType;
         this.BookName=BookName;
         this.AuthorName = AuthorName;
-        this.Price = Price;
+        Book.Price = Price;
         this.BookID = BookID;
-        this.Review=Review;
-        this.SoldBookNumber= SoldBookNumber;
-        this.UnsoldBookNumber=UnsoldBookNumber;
-        try {
-            this.Dob = parseDate(Dob);
-        } catch (ParseException ex) {
-            Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Book.Review=Review;
+        this.Dob = Dob;
+        
     }
-     private Date parseDate(String dob) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            return dateFormat.parse(dob);
-     }
+ 
+
+    public int getBookNumber() {
+        return BookNumber;
+    }
+
+    public void setBookNumber(int BookNumber) {
+        this.BookNumber = BookNumber;
+    }
+     
     public String getBookType() {
         return BookType ;
     }
@@ -101,23 +86,8 @@ public class Book {
 
     public void setPrice(double Price) {
         this.Price = Price;
-    }
-    
-    public int getSoldBookNumber() {
-        return SoldBookNumber;
-    }
- 
-    public void setSoldBookNumber(int SoldBookNumber) {
-        this.SoldBookNumber = SoldBookNumber;
-    }
-    
-    public int getUnsoldBookNumber() {
-        return UnsoldBookNumber;
-    }
- 
-    public void setUnsoldBookNumber(int UnsoldBookNumber) {
-        this.UnsoldBookNumber=UnsoldBookNumber;
-    }
+    }  
+   
 
     public Date getDob() {
         return Dob;
@@ -137,12 +107,11 @@ public class Book {
     return "Book {" +
             "Type of book: " + BookType +
             "Book's Name: " + BookName +
+            "Books in storage: " + BookNumber +
             ", Author's Name: " + AuthorName +
             ", Book ID: " + BookID +
-            ", Price: " + Price  +
+             ", Books's : " + Price +
             ", Day of production: " + dobString  +
-            ", Number of sold books: " + SoldBookNumber +
-            ", Number of unsold books: " + UnsoldBookNumber +
             ", Customer's reivew: " + Review +
             '}';
 }

@@ -1,41 +1,44 @@
 package Model;
 
 public class RentCustomer extends Customer {
-    double RentCost;
+    RentBook rb = new RentBook();
+    protected static int RentBookNumber;
+    protected static double RentPrice;
     
-    public RentCustomer(String ID, int BookNumberRent, double RentCost, String Review) {
-    super(ID, Review, BookNumberRent, 0, RentCost);
-    this.RentCost = RentCost;
-    // Other RentCustomer-specific initialization if needed
-}
+    
+    public RentCustomer(String ID, int BookNumber,String Review, int RentBookNumber, double RentPrice){
+        super( ID,BookNumber,Review);
+        this.RentBookNumber=RentBookNumber;
+        this.RentPrice=RentPrice;
+    }
+    public double getRentPrice() {
+        return rb.getRentPrice();
+    }
 
-    @Override
-    public int getBookNumberRent(){
-        return BookNumberRent;
+    public void setRentPrice(double RentPrice) {
+        this.RentPrice=RentPrice;
     }
-    @Override
-    public void setBookNumberRent(int BookNumberRent){
-        this.BookNumberRent=BookNumberRent;
+
+    public int getRentBookNumber() {
+        return rb.getRentBookNumber();
+    }
+
+    public void setRentBookNumber(int RentBookNumber) {
+        this.RentBookNumber = RentBookNumber;
     }
     
-    @Override
-    public double getCost() {
-        return RentCost;
+    
+
+     @Override
+    public String toString() {
+    return "Rent Customer{" +
+            super.toString() +
+            "Rent book number: " + getRentBookNumber() +
+            "Rent price: " + getRentPrice() +
+            '}';
     }
-    public double getRentCost() {
-        return RentCost;
-    }
-    @Override
-    public void setCost(double RentCost){
-        this.RentCost=RentCost;
-    }
-    @Override
-public String toString() {
-    return "RentCustomer {ID: " + ID +
-            ", Number of rentbooks: " + BookNumberRent +
-            ", Number of buybooks: " + BookNumberBuy +
-            ", Paid price for books: " + Cost +
-            ", Customer's review: " + Review +
-            "}";
-}
+
+    
+
+   
 }

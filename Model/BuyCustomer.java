@@ -1,49 +1,43 @@
 package Model;
 
 public class BuyCustomer extends Customer {
-    double BuyCost;
+    BuyBook bb = new BuyBook();
+    protected static double BuyPrice;
+    protected static int SoldBookNumber;
     
-    public BuyCustomer(String ID, int BookNumberBuy, double BuyCost, String Review) {
-    super(ID, Review, 0, BookNumberBuy, BuyCost);
-    this.BuyCost = BuyCost;
-    // Other BuyCustomer-specific initialization if needed
-}
-
-
-    @Override
-    public int getBookNumberBuy(){
-        return BookNumberBuy;
+    
+    public BuyCustomer(String ID, int BookNumber,String Review,int SoldBookNumber,double BuyPrice){
+        super(ID, BookNumber, Review);
+        this.BuyPrice=BuyPrice;
+        this.SoldBookNumber=SoldBookNumber;
     }
-    @Override
-    public void setBookNumberBuy(int BuyBookNumberBuy){
-        this.BookNumberBuy=BookNumberBuy;
+
+    public double getBuyPrice() {
+        return bb.getBuyPrice();
+    }
+
+    public void setBuyPrice(double BuyPrice) {
+        this.BuyPrice=BuyPrice;
+    }
+
+    public int getSoldBookNumber() {
+        return bb.getSoldBookNumber();
+    }
+
+    public void setSoldBookNumber(int SoldBookNumber) {
+        this.SoldBookNumber = SoldBookNumber;
     }
     
-    @Override
-    public double getCost() {
-        return BuyCost;
-    }
-
-    @Override
-    public void setCost(double BuyCost){
-        this.BuyCost=BuyCost;
-    }
+     @Override
     public String toString() {
-<<<<<<< HEAD
-    return "Buy Customer{" +
-            "ID='" + ID +
-            ", Số sách dã mua='" + BookNumber +
-            ", Tiền sách mua='" + Cost  +
+    return "Rent Customer{" +
+            super.toString() +
+            "Buy book number: " + getSoldBookNumber() +
+            "Buy price: " +  getBuyPrice() +
             '}';
     }
-=======
-    return "BuyCustomer {ID: " + ID +
-            ", Number of rentbooks: " + BookNumberRent +
-            ", Number of buybooks: " + BookNumberBuy +
-            ", Paid price for books: " + Cost +
-            ", Customer's review: " + Review +
-            "}";
-}
->>>>>>> 3c1c3244e7fac1aca3b9642b9d272c23ea09a98d
+
     
+
+   
 }
