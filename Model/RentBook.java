@@ -11,26 +11,34 @@ import java.util.logging.Logger;
 public class RentBook extends Book {
     private double RentPrice;
     private int BookNumber;
-    Date NgayThueSach;
-    Date NgayTraSach;
+    Date RentDay;
+    Date ReturnDay;
     
     
  
-    public RentBook(double RentPrice,int BookNumber, String NgayThueSach, String NgayTraSach) {
-        
-        this.RentPrice=RentPrice;
-        this.BookNumber=BookNumber;
-         try {
-            this.NgayThueSach = parseDate(NgayThueSach);
-            this.NgayTraSach = parseDate(NgayTraSach);
-        } catch (ParseException ex) {
-            Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public RentBook(String BookType, String BookName, String AuthorName, String BookID, double RentPrice, int BookNumber, String Dob, String RentDay, String ReturnDay) {
+    this.BookType = BookType;
+    this.BookName = BookName;
+    this.AuthorName = AuthorName;
+    this.BookID = BookID;
+    this.RentPrice = RentPrice;
+    this.BookNumber = BookNumber;
+    
+    try {
+        this.Dob = parseDate(Dob);
+        this.RentDay = parseDate(RentDay);
+        this.ReturnDay = parseDate(ReturnDay);
+    } catch (ParseException ex) {
+        Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
     }
-    private Date parseDate(String NgayThueSach) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-            return dateFormat.parse(NgayThueSach);
-     }
+}
+
+private Date parseDate(String dateString) throws ParseException {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    return dateFormat.parse(dateString);
+}
+
+
     public int getBookNumber(){
         return BookNumber;
     }
@@ -43,36 +51,36 @@ public class RentBook extends Book {
     public void setRentPrice(double RentPrice){
         this.RentPrice=RentPrice;
     }
-      public Date getNgayThueSach() {
-        return NgayThueSach;
+      public Date getRentDay() {
+        return RentDay;
     }
 
-    public void setNgayThueSach(Date NgayThueSach) {
-        this.NgayThueSach = NgayThueSach;
+    public void setRentDay(Date RentDay) {
+        this.RentDay = RentDay;
     }
-      public Date getNgayTraach() {
-        return NgayTraSach;
+      public Date getReturnDay() {
+        return ReturnDay;
     }
 
-    public void setNgayTraSach(Date NgayTraSach) {
-        this.NgayTraSach = NgayTraSach;
+    public void setReturnDay(Date ReturnDay) {
+        this.ReturnDay = ReturnDay;
     }
   @Override
     public String toString() {
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
      String dobString = dateFormat.format(Dob);
-    String dateString = dateFormat.format(NgayThueSach);
-    String dateString1 = dateFormat.format(NgayTraSach);
-    return "Rent Book(" +
-            "The loai='" + TheLoai +
-            "Book Name='" + BookName +
-            ", Author Name='" + AuthorName +
-             ", Book ID ='" + BookID +
-            ", Rent Price='" + RentPrice  +
+    String dateString = dateFormat.format(RentDay);
+    String dateString1 = dateFormat.format(ReturnDay);
+    return "Rent Book {" +
+            "Type of book: " + BookType +
+            "Book's Name: " + BookName +
+            ", Author's Name: " + AuthorName +
+            ", Book ID: " + BookID +
+            ", Rent Price: " + RentPrice  +
             ", Day of production='" + dobString  +
-            ", Ngay Thue Sach='" + dateString  +
-            ", Ngay Tra Sach='" + dateString1  +
-            ", So luong trong kho='" + BookNumber +
+            ", Rent-day: " + dateString  +
+            ", Return-day: " + dateString1  +
+            ", Number of books in storage: " + BookNumber +
             '}';
     }
 }

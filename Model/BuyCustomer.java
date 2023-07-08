@@ -1,20 +1,22 @@
 package Model;
 
 public class BuyCustomer extends Customer {
-     private int BuyBookNumber;
     double BuyCost;
     
-    public BuyCustomer(int BuyBookNumber, double BuyCost){
-        this.BuyBookNumber=BuyBookNumber;
-        this.BuyCost=BuyCost;
+    public BuyCustomer(String ID, int BookNumberBuy, double BuyCost, String Review) {
+    super(ID, Review, 0, BookNumberBuy, BuyCost);
+    this.BuyCost = BuyCost;
+    // Other BuyCustomer-specific initialization if needed
+}
+
+
+    @Override
+    public int getBookNumberBuy(){
+        return BookNumberBuy;
     }
     @Override
-    public int getBookNumber(){
-        return BuyBookNumber;
-    }
-    @Override
-    public void setBookNumber(int BuyBookNumber){
-        this.BookNumber=BuyBookNumber;
+    public void setBookNumberBuy(int BuyBookNumberBuy){
+        this.BookNumberBuy=BookNumberBuy;
     }
     
     @Override
@@ -23,16 +25,25 @@ public class BuyCustomer extends Customer {
     }
 
     @Override
-    public void setCost(double RentCost){
-        this.Cost=BuyCost;
+    public void setCost(double BuyCost){
+        this.BuyCost=BuyCost;
     }
-     @Override
     public String toString() {
+<<<<<<< HEAD
     return "Buy Customer{" +
             "ID='" + ID +
             ", Số sách dã mua='" + BookNumber +
             ", Tiền sách mua='" + Cost  +
             '}';
     }
+=======
+    return "BuyCustomer {ID: " + ID +
+            ", Number of rentbooks: " + BookNumberRent +
+            ", Number of buybooks: " + BookNumberBuy +
+            ", Paid price for books: " + Cost +
+            ", Customer's review: " + Review +
+            "}";
+}
+>>>>>>> 3c1c3244e7fac1aca3b9642b9d272c23ea09a98d
     
 }

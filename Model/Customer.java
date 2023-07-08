@@ -1,10 +1,10 @@
 package Model;
 
-import Controller.Admin;
-public class Customer extends Admin{
+public abstract class Customer {
     String ID;
     String Review;
-    int BookNumber;
+    int BookNumberRent;
+    int BookNumberBuy;
     double Cost;
     
     public Customer(){
@@ -12,13 +12,15 @@ public class Customer extends Admin{
     }
     
 
-    public Customer(String ID,String Review, int BookNumber, double Cost ) {
-        super();
-        this.ID = ID;
-        this.BookNumber=BookNumber;
-        this.Review=Review;
-        this.Cost=Cost;         
-    }
+   public Customer(String ID, String Review, int BookNumberRent, int BookNumberBuy, double Cost) {
+    this.ID = ID;
+    this.Review = Review;
+    this.BookNumberRent = BookNumberRent;
+    this.BookNumberBuy = BookNumberBuy;
+    this.Cost = Cost;
+}
+
+
     public String getID() {
         return ID;
     }
@@ -27,21 +29,30 @@ public class Customer extends Admin{
         this.ID = ID;
     }
 
-    public int getBookNumber() {
-        return BookNumber;
+    public int getBookNumberRent() {
+        return BookNumberRent;
+    }
+    
+    public void setBookNumberRent(int BookNumberRent){
+        this.BookNumberRent=BookNumberRent;
+    }
+    
+    public int getBookNumberBuy(){
+        return BookNumberBuy;
     }
 
-    public void setBookNumber(int BookNumber) {
-        this.BookNumber=BookNumber;
+    public void setBookNumberBuy(int BookNumberBuyu) {
+        this.BookNumberBuy=BookNumberBuy;
     }
 
-    public double getCost() {
+    public double getCost(){
         return Cost;
-    }
-
+    } 
+    
     public void setCost(double Cost){
         this.Cost=Cost;
     }
+
     public String getReview(){
         return Review;
     }
@@ -49,6 +60,7 @@ public class Customer extends Admin{
     public void setReview(String Review){
         this.Review=Review;
     }
+<<<<<<< HEAD
 
     @Override
     public String toString() {
@@ -58,7 +70,25 @@ public class Customer extends Admin{
             ", Tiền sách='" + Cost  +
             ", Review ='" + Review  +
             '}';
+=======
+@Override
+public String toString() {
+    String customerType = "Customer";
+    if (this instanceof RentCustomer) {
+        customerType = "RentCustomer";
+    } else if (this instanceof BuyCustomer) {
+        customerType = "BuyCustomer";
+>>>>>>> 3c1c3244e7fac1aca3b9642b9d272c23ea09a98d
     }
+
+    return customerType + " {ID: " + ID +
+            ", Number of rentbooks: " + BookNumberRent +
+            ", Number of buybooks: " + BookNumberBuy +
+            ", Paid price for books: " + Cost +
+            ", Customer's review: " + Review +
+            "}";
+}
+
 
 }
 

@@ -1,7 +1,6 @@
 
 package Model;
 
-import Controller.Admin;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,6 +9,7 @@ import java.util.logging.Logger;
 import java.util.Scanner;
 
 public class Book {
+<<<<<<< HEAD
     static Scanner scanner = new Scanner(System.in);
     private String TheLoai;
     private String BookName;
@@ -20,14 +20,25 @@ public class Book {
     private int SoldBookNumber;
     private int UnsoldBookNumber;
     private Date Dob;
+=======
+    Scanner scanner = new Scanner(System.in);
+    String BookType;
+    String BookName;
+    String AuthorName;
+    String BookID;
+    String Review;
+    double Price;
+    int SoldBookNumber;
+    int UnsoldBookNumber;
+    Date Dob;
+>>>>>>> 3c1c3244e7fac1aca3b9642b9d272c23ea09a98d
     
     public Book(){
         
     }
-
-    public Book (String TheLoai,String BookName, String AuthorName,String HookID,String Review, double Price,int SoldBookNumber, int UnsoldBookNumber, String Dob) {
+    public Book (String BookType,String BookName, String AuthorName,String BookID, double Price, String Dob,int SoldBookNumber, int UnsoldBookNumber,String Review) {
         super();
-        this.TheLoai = TheLoai;
+        this.BookType = BookType;
         this.BookName=BookName;
         this.AuthorName = AuthorName;
         this.Price = Price;
@@ -42,15 +53,15 @@ public class Book {
         }
     }
      private Date parseDate(String dob) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             return dateFormat.parse(dob);
      }
-    public String getTheLoai() {
-        return TheLoai ;
+    public String getBookType() {
+        return BookType ;
     }
 
-    public void setTheLoai(String TheLoai) {
-        this.TheLoai = TheLoai;
+    public void setBookType(String BookType) {
+        this.BookType = BookType;
     }
     
     public String getBookName() {
@@ -121,18 +132,18 @@ public class Book {
     
     @Override
     public String toString() {
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     String dobString = dateFormat.format(Dob);
-    return "Book(" +
-            "The loai='" + TheLoai +
-            "Book Name='" + BookName +
-            ", Author Name='" + AuthorName +
-             ", Book ID ='" + BookID +
-            ", Price='" + Price  +
-            ", Day of production='" + dobString  +
-            ", So luong da ban='" + SoldBookNumber +
-            ", So luong trong kho='" + UnsoldBookNumber +
-            ", Review sach='" + Review +
+    return "Book {" +
+            "Type of book: " + BookType +
+            "Book's Name: " + BookName +
+            ", Author's Name: " + AuthorName +
+            ", Book ID: " + BookID +
+            ", Price: " + Price  +
+            ", Day of production: " + dobString  +
+            ", Number of sold books: " + SoldBookNumber +
+            ", Number of unsold books: " + UnsoldBookNumber +
+            ", Customer's reivew: " + Review +
             '}';
 }
 
