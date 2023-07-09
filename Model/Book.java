@@ -119,6 +119,7 @@ public class Book {
     
     @Override
     public String toString() {
+<<<<<<< Updated upstream
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     String dobString = dateFormat.format(Dob);
     return "Book {" +
@@ -133,5 +134,20 @@ public class Book {
             ", Customer's reivew: " + Review +
             '}';
 }
+=======
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String dobString = dateFormat.format(Dob);
+        return "Type of book: " + BookType +
+                ", Book's Name: " + BookName +
+                ", Books in storage: " + BookNumber +
+                ", Author's Name: " + AuthorName +
+                ", Book ID: " + BookID +
+                ", Books's Price : " + Price +
+                ", Day of production: " + dobString +
+                ", Customer's review: " + Review +
+                '}';
+    }
+    
+>>>>>>> Stashed changes
 
 }

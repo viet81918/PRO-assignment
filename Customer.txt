@@ -1,3 +1,10 @@
+<<<<<<< Updated upstream
 KH001;5; 490.000; Tiem sach Viet Nguyen co chat luong phuc vu tot
 KH002;3; 395.000; Co nhieu sach hay o tiem sach
 KH003;2; 280.000; Se ung ho shop trong thoi gian toi
+=======
+Buy Customer{Customer {ID: KH001, Number of books used: 2, Customer's review: Tiem sach Viet Nguyen co chat luong phuc vu tot}Buy book number: 1Buy price: 190.0}
+Buy Customer{Customer {ID: KH003, Number of books used: 1, Customer's review:  Se ung ho shop trong thoi gian toi}Buy book number: 1Buy price: 240.0}
+Rent Customer{Customer {ID: KH001, Number of books used: 2, Customer's review:  Tiem sach Viet Nguyen co chat luong phuc vu tot}Rent book number: 1Rent price: 120.0}
+Rent Customer{Customer {ID: KH002, Number of books used: 1, Customer's review:  Co nhieu sach hay o tiem sach}Rent book number: 1Rent price: 105.0}
+>>>>>>> Stashed changes

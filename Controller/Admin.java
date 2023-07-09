@@ -1,9 +1,11 @@
 package Controller;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.text.ParseException;
@@ -109,6 +111,7 @@ private static void addRentBooks(BufferedReader reader) throws IOException {
         readRentBooks.add(rentBook);
         rentBooks.add(rentBook);
     }
+<<<<<<< Updated upstream
 }
 
 private static void addRentCustomers(BufferedReader reader) throws IOException {
@@ -131,9 +134,83 @@ private static void addRentCustomers(BufferedReader reader) throws IOException {
             book.setRentDay(rentalDate);
         } catch (ParseException ex) {
             java.util.logging.Logger.getLogger(Customer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+=======
+    public static void writeObjects(String fileName) {
+    String path = System.getProperty("user.dir") + File.separator + fileName;
+    File file = new File(path);
+    
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+        if (fileName.equals("BuyBook.txt")) {
+            for (BuyBook book : buyBooks) {
+                writer.write(book.toString());
+                writer.newLine();
+            }
+        } else if (fileName.equals("BuyCustomer.txt")) {
+            for (BuyCustomer customer : buyCustomers) {
+                writer.write(customer.toString());
+                writer.newLine();
+            }
+        } else if (fileName.equals("RentBook.txt")) {
+            for (RentBook book : rentBooks) {
+                writer.write(book.toString());
+                writer.newLine();
+            }
+        } else if (fileName.equals("RentCustomer.txt")) {
+            for (RentCustomer customer : rentCustomers) {
+                writer.write(customer.toString());
+                writer.newLine();
+            }
+>>>>>>> Stashed changes
         }
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+<<<<<<< Updated upstream
     public static void delRentBook(RentBook book,Customer Customer,RentCustomer RentCustomer){
+=======
+}
+public static void writeBooksToFile() {
+    String bookFilePath = System.getProperty("user.dir") + File.separator + "Book.txt";
+    File bookFile = new File(bookFilePath);
+    
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(bookFile))) {
+        for (BuyBook book : buyBooks) {
+            writer.write(book.toString());
+            writer.newLine();
+        }
+        
+        for (RentBook book : rentBooks) {
+            writer.write(book.toString());
+            writer.newLine();
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
+public static void writeCustomersToFile() {
+    String customerFilePath = System.getProperty("user.dir") + File.separator + "Customer.txt";
+    File customerFile = new File(customerFilePath);
+    
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(customerFile))) {
+        for (BuyCustomer customer : buyCustomers) {
+            writer.write(customer.toString());
+            writer.newLine();
+        }
+        
+        for (RentCustomer customer : rentCustomers) {
+            writer.write(customer.toString());
+            writer.newLine();
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
+
+
+    public static void delRentBook(RentBook book, Customer Customer, RentCustomer RentCustomer) {
+>>>>>>> Stashed changes
         rentBooks.remove(book);
         RentCustomer.setBookNumber(RentCustomer.getBookNumber()-1);
         if (RentCustomer.getBookNumber() < 0){
@@ -155,6 +232,7 @@ private static void addRentCustomers(BufferedReader reader) throws IOException {
         addReadObject("BuyCustomer.txt");
         addReadObject("Book.txt");
         addReadObject("RentBook.txt");
+<<<<<<< Updated upstream
         for (Customer customers : customers){
             System.out.println(customers.toString());}
         for (BuyCustomer buyCustomer : buyCustomers){
@@ -165,6 +243,25 @@ private static void addRentCustomers(BufferedReader reader) throws IOException {
             System.out.println(books.toString());}
         for (RentBook rentBook : rentBooks){
             System.out.println(rentBook.toString());}
+=======
+        writeBooksToFile();
+        writeCustomersToFile();
+
+        for (RentCustomer rentCustomer : rentCustomers) {
+            System.out.println(rentCustomer.toString());
+        }
+         for (BuyCustomer BuyCustomer : buyCustomers) {
+            System.out.println(BuyCustomer.toString());
+        }
+        for (RentBook rentBook : rentBooks) {
+            System.out.println(rentBook.toString());
+        }
+        for (BuyBook Buybooks : buyBooks) {
+            System.out.println(Buybooks.toString());
+        }
+       
+
+>>>>>>> Stashed changes
     }
     private static Date parseDate(String dateStr) throws  ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
