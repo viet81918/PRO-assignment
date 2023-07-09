@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-public abstract class Book {
+public abstract class Book  {
     Scanner scanner = new Scanner(System.in);
     private int BookNumber;
     private String BookType;
@@ -104,16 +104,17 @@ public abstract class Book {
     public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dobString = dateFormat.format(Dob);
-        return "Type of book: " + BookType +
-                "; Book's Name: " + BookName +
-                "; Books in storage: " + BookNumber +
-                "; Author's Name: " + AuthorName +
-                "; Book ID: " + BookID +
-                "; Books's Price : " + Price +
-                "; Day of production: " + dobString +
-                "; Customer's review: " + Review +
-                '}';
+        return "| Type of book: " + BookType +
+                " | Book's Name: " + BookName +
+                " | Books in storage: " + BookNumber +
+                " | Author's Name: " + AuthorName +  
+                " | Book ID: " + BookID + 
+                " | Books's Price : " + Price +
+                " | Day of production: " + dobString + 
+                " | Customer's review: " + Review 
+                ;
+    }
+    
     }
     
 
-}

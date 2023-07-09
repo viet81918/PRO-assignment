@@ -55,11 +55,11 @@ public class BuyCustomer extends Customer {
 
     @Override
     public String toString() {
-    return "Buy Customer{" +
+    return "---BUY CUSTOMER---" +
             super.toString() +
-            "Buy book number: " + getSoldBookNumber() +
-            "Buy price: " +  getBuyPrice() +
-            '}';
+            "| Buy book number: " + getSoldBookNumber() +
+            "| Buy price: " +  getBuyPrice() +
+            "\n";
     }
 }
 

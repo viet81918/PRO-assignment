@@ -1,25 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controller;
 
 import Model.Book;
+import Model.BuyBook;
 import Model.Customer;
 import Model.RentBook;
+import Controller.Admin;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Predicate;
 
 
-public class CustomerManage {
+public class CustomerManage  {
     List cuslist;
     List Buylist;
     List Rentlist;
     public CustomerManage() {
+        
         cuslist = new LinkedList();
         Buylist= new LinkedList();
         Rentlist=new LinkedList();
@@ -83,7 +86,7 @@ public class CustomerManage {
     public void printRentbook(String id) {
         Rentlist=search((RentBook rb)->rb.getBookID().equalsIgnoreCase(id));
     }
-    public <T>void checkIddiscount(String id) {
+    public <T>int checkIddiscount(String id) {
         
             ArrayList<T> cusdisc;
             cusdisc = new ArrayList<>();
@@ -91,12 +94,28 @@ public class CustomerManage {
         
             int count = cusdisc.size();
         if(count>=3) {
-            
+            return 
         }
         else {
             
             }
         }
+    public static void setDayRentBook(RentBook book, String date,String returnDay) {
+        try {
+            Date rentalDate = parseDate(date);
+            book.setRentDay(rentalDate);
+            Date ReturnDay = parseDate(returnDay);
+            book.setReturnDay(ReturnDay);
+
+        } catch (ParseException ex) {
+            java.util.logging.Logger.getLogger(Customer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }
+
+    public static Date parseDate(String dateStr) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.parse(dateStr);
+    }
     
    }
 

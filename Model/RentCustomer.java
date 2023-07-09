@@ -40,11 +40,11 @@ public class RentCustomer extends Customer {
 
     @Override
     public String toString() {
-    return "Rent Customer{" +
+    return "--RENT CUSTOMER--" +
             super.toString() +
-            "Rent book number: " + getRentBookNumber() +
-            "Rent price: " + getRentPrice() +
-            '}';
+            "| Rent book number: " + getRentBookNumber() +
+            "| Rent price: " + getRentPrice() +
+            "\n";
     }
 
     

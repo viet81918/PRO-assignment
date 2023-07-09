@@ -17,14 +17,7 @@ public class RentBook extends Book {
     public RentBook(){
         
     }
-    public RentBook(double RentPrice) {
-        
-        this.RentPrice = RentPrice;
-        
-    }
-    public RentBook(int RentBookNumber) {
-        this.RentBookNumber = RentBookNumber;
-    }
+    
     
  
     public RentBook(String BookType, String BookName, String AuthorName, String BookID, double Price , Date Dob, String Review , int BookNumber, double RentPrice, int RentBookNumber, String RentDay, String ReturnDay) {
@@ -82,14 +75,13 @@ private Date parseDate(String dateString) throws ParseException {
     
     String dateString = dateFormat.format(RentDay);
     String dateString1 = dateFormat.format(ReturnDay);
-    return "Rent Book {" +
+    return "---RENT BOOK---" +  
             super.toString() +
-            ", Rent Book Number: " + RentBookNumber  +
-            ", Rent Price: " + RentPrice  +
-            ", Rent-day: " + dateString  +
-            ", Return-day: " + dateString1  +
-            
-            '}';
+            "| Rent Book Number: " + RentBookNumber  +  
+            "| Rent Price: " + RentPrice  +  
+            "| Rent-day: " + dateString  +  
+            "| Return-day: " + dateString1  +  
+             "\n"   ;
     }
 
     

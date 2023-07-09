@@ -30,10 +30,10 @@ public class BuyBook extends Book {
 
     @Override
     public String toString() {
-        return "BuyBook{" +
+        return "---BUY BOOK----" +
                super.toString() + 
-               "SoldBook Number: " + SoldBookNumber + 
-               ", Buy Price: " + getBuyPrice() + '}';
+               "| SoldBook Number: " + SoldBookNumber + 
+               "| Buy Price: " + getBuyPrice() +"\n";
     }
 
   

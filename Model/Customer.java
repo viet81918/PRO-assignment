@@ -47,10 +47,9 @@ public abstract class Customer {
 
    @Override
     public String toString() {
-    return  "ID: " + ID +
-            ", Number of books used: " + BookNumber +
-            ", Customer's review: " + Review  +
-            '}';
+    return  "| ID: " + ID +
+            "| Number of books used: " + BookNumber +
+            "| Customer's review: " + Review ;
     }
 }
 

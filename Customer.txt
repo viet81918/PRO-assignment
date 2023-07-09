@@ -1,4 +1,8 @@
-Buy Customer{ID: KH001, Number of books used: 2, Customer's review: Tiem sach Viet Nguyen co chat luong phuc vu nhu cai dau buoi }Buy book number: 2Buy price: 190000.0}
-Buy Customer{ID: KH003, Number of books used: 1, Customer's review:  Se ung ho shop trong thoi gian toi}Buy book number: 1Buy price: 240000.0}
-Rent Customer{ID: KH001, Number of books used: 2, Customer's review:  Tiem sach Viet Nguyen co chat luong phuc vu tot}Rent book number: 2Rent price: 120.0}
-Rent Customer{ID: KH002, Number of books used: 1, Customer's review:  Co nhieu sach hay o tiem sach}Rent book number: 1Rent price: 105.0}
+---BUY CUSTOMER---| ID: KH001| Number of books used: 2| Customer's review: Tiem sach Viet Nguyen co chat luong phuc vu nhu cai dau buoi | Buy book number: 2| Buy price: 190000.0
+
+---BUY CUSTOMER---| ID: KH003| Number of books used: 1| Customer's review:  Se ung ho shop trong thoi gian toi| Buy book number: 1| Buy price: 240000.0
+
+--RENT CUSTOMER--| ID: KH001| Number of books used: 2| Customer's review:  Tiem sach Viet Nguyen co chat luong phuc vu tot| Rent book number: 2| Rent price: 120.0
+
+--RENT CUSTOMER--| ID: KH002| Number of books used: 1| Customer's review:  Co nhieu sach hay o tiem sach| Rent book number: 1| Rent price: 105.0
+
