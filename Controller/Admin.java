@@ -1,9 +1,11 @@
 package Controller;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.text.ParseException;
@@ -24,7 +26,6 @@ public class Admin {
     static ArrayList<BuyCustomer> buyCustomers = new ArrayList<>();
     static ArrayList<BuyBook> buyBooks = new ArrayList<>();
     static ArrayList<RentBook> rentBooks = new ArrayList<>();
-
 
     public static <T> ArrayList<T> ReadFile(String path, Class<T> type) {
         ArrayList<T> items = new ArrayList<>();
@@ -64,7 +65,7 @@ public class Admin {
             String[] data = line.split(";");
             BuyBook book = new BuyBook(data[0], data[1], data[2], data[3], Integer.parseInt(data[4]),
                     Double.parseDouble(data[5]), (java.util.Date) parseDate(data[6]), Integer.parseInt(data[7]),
-                     data[8]);
+                    data[8]);
             buyBooks.add(book);
         }
     }
@@ -88,7 +89,8 @@ public class Admin {
             // Assuming rent book data is comma-separated
             String[] data = line.split(";");
             RentBook book = new RentBook(data[0], data[1], data[2], data[3], Double.parseDouble(data[4]),
-                    parseDate(data[5]), data[6], Integer.parseInt(data[7]),Double.parseDouble(data[8]), Integer.parseInt(data[9]),data[10],data[11]);
+                    parseDate(data[5]), data[6], Integer.parseInt(data[7]), Double.parseDouble(data[8]),
+                    Integer.parseInt(data[9]), data[10], data[11]);
             rentBooks.add(book);
         }
     }
@@ -104,17 +106,45 @@ public class Admin {
             rentCustomers.add(customer);
         }
     }
+    public static void writeBooksToFile() {
+        String bookFilePath = System.getProperty("user.dir") + File.separator + "Book.txt";
+        File bookFile = new File(bookFilePath);
 
-    public static void setDayRentBook(RentBook book, String date) {
-        try {
-            Date rentalDate = parseDate(date);
-            book.setRentDay(rentalDate);
-        } catch (ParseException ex) {
-            java.util.logging.Logger.getLogger(Customer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(bookFile))) {
+            for (BuyBook book : buyBooks) {
+                writer.write(book.toString());
+                writer.newLine();
+            }
+
+            for (RentBook book : rentBooks) {
+                writer.write(book.toString());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    public static void delRentBook(RentBook book, Customer Customer, RentCustomer RentCustomer) {
+    public static void writeCustomersToFile() {
+        String customerFilePath = System.getProperty("user.dir") + File.separator + "Customer.txt";
+        File customerFile = new File(customerFilePath);
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(customerFile))) {
+            for (BuyCustomer customer : buyCustomers) {
+                writer.write(customer.toString());
+                writer.newLine();
+            }
+
+            for (RentCustomer customer : rentCustomers) {
+                writer.write(customer.toString());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void delRentBook(RentBook book, RentCustomer RentCustomer) {
         rentBooks.remove(book);
         RentCustomer.setBookNumber(RentCustomer.getBookNumber() - 1);
         if (RentCustomer.getBookNumber() < 0) {
@@ -122,25 +152,27 @@ public class Admin {
         }
     }
 
-    public static void printRentBook(RentBook book) {
-        System.out.println(book.toString());
-    }
-
-    public static void addRentBooks(RentBook book, Customer Customer, RentCustomer rentCustomer) {
+    public static void addRentBooks(RentBook book, RentCustomer rentCustomer) {
         rentBooks.add(book);
         rentCustomer.setBookNumber(rentCustomer.getBookNumber() + 1);
-        Customer.setBookNumber(Customer.getBookNumber() + 1);
     }
-
+    public static void printlnRentBooks(RentBook book){
+        for (RentBook rentBook : rentBooks) {
+            System.out.println(rentBook.toString());
+        }
+    }
     public static void main(String[] args) throws Exception {
         addReadObject("RentCustomer.txt");
         addReadObject("BuyCustomer.txt");
         addReadObject("BuyBook.txt");
         addReadObject("RentBook.txt");
+        writeBooksToFile();
+        writeCustomersToFile();
+
         for (RentCustomer rentCustomer : rentCustomers) {
             System.out.println(rentCustomer.toString());
         }
-         for (BuyCustomer BuyCustomer : buyCustomers) {
+        for (BuyCustomer BuyCustomer : buyCustomers) {
             System.out.println(BuyCustomer.toString());
         }
         for (RentBook rentBook : rentBooks) {
@@ -149,8 +181,6 @@ public class Admin {
         for (BuyBook Buybooks : buyBooks) {
             System.out.println(Buybooks.toString());
         }
-       
-
     }
 
     private static Date parseDate(String dateStr) throws ParseException {
