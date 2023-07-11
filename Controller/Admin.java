@@ -18,12 +18,21 @@ import Model.BuyCustomer;
 import Model.RentBook;
 import Model.RentCustomer;
 
+<<<<<<< Updated upstream
 public class Admin {
     static String customersFilePath = "Customer.txt";
     static String rentCustomersFilePath = "RentCustomer.txt";
     static String buyCustomersFilePath = "BuyCustomer.txt";
     static String booksFilePath = "Book.txt";
     static String rentBooksFilePath = "RentBook.txt";
+=======
+    import Model.Customer;
+    import Model.Book;
+import Model.BuyBook;
+import Model.BuyCustomer;
+    import Model.RentBook;
+    import Model.RentCustomer;
+>>>>>>> Stashed changes
 
     static ArrayList<Customer> customers = ReadFile(customersFilePath, Customer.class);
     static ArrayList<RentCustomer> rentCustomers = ReadFile(rentCustomersFilePath, RentCustomer.class);
@@ -127,8 +136,104 @@ public class Admin {
                     rentCustomers.add(rentCustomer);
                 }
             }
+<<<<<<< Updated upstream
         } catch (IOException e) {
             e.printStackTrace();
+=======
+            return customersfind;
+        }
+
+        public void addBbook(BuyBook b) {
+            Bbooklist.add(b);
+        }
+
+        public double SumPrice(RentBook rb, BuyBook b) {
+            return rb.getRentPrice() + b.getBuyPrice();
+        }
+
+        public static void SortBook() {
+            Collections.sort(Bbooklist, new Comparator<BuyBook>() {
+                @Override
+                public int compare(BuyBook book1, BuyBook book2) {
+                    return Integer.compare(book2.getBookNumber(), book1.getBookNumber());
+                }
+            });
+        }
+        
+                
+        
+
+        public static void main(String[] args) throws Exception {
+            addReadObject("RentCustomer.txt");
+            addReadObject("BuyCustomer.txt");
+            addReadObject("BuyBook.txt");
+            addReadObject("RentBook.txt");
+            writeBooksToFile();
+            writeCustomersToFile();
+            System.out.println("Nhap vao id: ");
+            String id = scanner.nextLine();
+            ArrayList<RentCustomer> relist = new ArrayList<>();
+            relist = FindCustomer(id);
+            for (RentCustomer rc : relist) {
+                System.out.println(rc.toString());
+            }
+            BuyBook bookWithMaxQuantity = Bbooklist.get(0);
+            for (BuyBook book : Bbooklist) {
+                if (book.getSoldBookNumber() > bookWithMaxQuantity.getSoldBookNumber()) {
+                    bookWithMaxQuantity = book;
+                }
+            }
+            Collections.sort(Bbooklist, new Comparator<BuyBook>() {
+                @Override
+                public int compare(BuyBook book1, BuyBook book2) {
+                    return Integer.compare(book2.getSoldBookNumber(), book1.getSoldBookNumber());
+                }
+            });
+            for (BuyBook book : Bbooklist) {
+                System.out.println("Title: " + book.getBookName() + ", Quantity: " + book.getSoldBookNumber());
+            }
+        }
+
+        private static Date parseDate(String dateStr) throws ParseException {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            return dateFormat.parse(dateStr);
+        }
+
+        public <T> ArrayList<T> searchRentBook(Predicate<Object> p) {
+            ArrayList<T> rentbookfind = new ArrayList<>();
+            for (Object renbok : Rbooklist) {
+                if (p.test(renbok))
+                    rentbookfind.add((T) renbok);
+            }
+            return rentbookfind;
+        }
+
+        public <T> ArrayList<T> searchRentCustomer(Predicate<Object> p) {
+            ArrayList<T> cuslistfind = new ArrayList<>();
+            for (Object cus : Rcuslist) {
+                if (p.test(cus))
+                    cuslistfind.add((T) cus);
+            }
+            return cuslistfind;
+        }
+
+        public <T> ArrayList<T> searchBuyCustomer(Predicate<Object> p) {
+            ArrayList<T> cuslistfind = new ArrayList<>();
+            for (Object cus : Bcuslist) {
+                if (p.test(cus))
+                    cuslistfind.add((T) cus);
+            }
+            return cuslistfind;
+        }
+
+        public <T> ArrayList<T> searchBuyBook(Predicate<Object> p) {
+            ArrayList<T> cuslistfind = new ArrayList<>();
+            for (Object cus : Bbooklist) {
+                if (p.test(cus))
+                    cuslistfind.add((T) cus);
+            }
+            return cuslistfind;
+>>>>>>> Stashed changes
         }
     }
 
