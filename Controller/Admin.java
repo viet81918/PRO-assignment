@@ -24,7 +24,7 @@ public class Admin {
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<RentCustomer> Rcuslist = new ArrayList<>();
     static ArrayList<BuyCustomer> Bcuslist = new ArrayList<>();
-    static ArrayList<BuyBook> Bbooklist = new ArrayList<>();
+    public static ArrayList<BuyBook> Bbooklist = new ArrayList<>();
     static ArrayList<RentBook> Rbooklist = new ArrayList<>();
     static ArrayList<String> bookReview = new ArrayList<>();
 
@@ -76,8 +76,8 @@ public class Admin {
             // Assuming rent book data is comma-separated
             String[] data = line.split(";");
             RentBook book = new RentBook(data[0], data[1], data[2], data[3], Double.parseDouble(data[4]),
-                    parseDate(data[5]), data[6], Integer.parseInt(data[7]), Double.parseDouble(data[8]),
-                    Integer.parseInt(data[9]), data[10], data[11]);
+                    parseDate(data[5]), data[6], Integer.parseInt(data[7]),
+                    Integer.parseInt(data[8]), data[9], data[10]);
             Rbooklist.add(book);
         }
     }
@@ -151,7 +151,7 @@ public class Admin {
         }
     }
 
-    public void addBbook(BuyBook b) {
+    public static void addBbook(BuyBook b) {
         Bbooklist.add(b);
     }
 
@@ -169,7 +169,7 @@ public class Admin {
         });
     }
 
-    public <T> ArrayList<T> searchRentBook(Predicate<Object> p) {
+    public static <T> ArrayList<T> searchRentBook(Predicate<Object> p) {
         ArrayList<T> rentbookfind = new ArrayList<>();
         for (Object renbok : Rbooklist) {
             if (p.test(renbok))
@@ -196,7 +196,7 @@ public class Admin {
         return cuslistfind;
     }
 
-    public <T> ArrayList<T> searchBuyBook(Predicate<Object> p) {
+    public static <T> ArrayList<T> searchBuyBook(Predicate<Object> p) {
         ArrayList<T> cuslistfind = new ArrayList<>();
         for (Object cus : Bbooklist) {
             if (p.test(cus))

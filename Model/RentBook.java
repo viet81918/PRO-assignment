@@ -20,9 +20,8 @@ public class RentBook extends Book {
     
     
  
-    public RentBook(String BookType, String BookName, String AuthorName, String BookID, double Price , Date Dob, String Review , int BookNumber, double RentPrice, int RentBookNumber, String RentDay, String ReturnDay) {
+    public RentBook(String BookType, String BookName, String AuthorName, String BookID, double Price , Date Dob, String Review , int BookNumber, int RentBookNumber, String RentDay, String ReturnDay) {
     super(BookType, BookName, AuthorName, BookID, Price, Dob, Review, BookNumber);
-    this.RentPrice = RentPrice;
     this.RentBookNumber=RentBookNumber;
    
     try {

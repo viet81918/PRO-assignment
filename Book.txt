@@ -4,7 +4,7 @@
 
 ---BUY BOOK----| Type of book: Kinh Di | Book's Name:  Slient hill | Books in storage: 15 | Author's Name:  Stephen King | Book ID:  MS1803 | Books's Price : 210.0 | Day of production: 02/03/1986 | Customer's review:  Cuon sach co vo so tinh tiet ron toc gay, khien ban khong the roi mat khi doc| SoldBook Number: 1| Buy Price: 210.0
 
----RENT BOOK---| Type of book: Thieu Nhi | Book's Name: Cho toi mot ve di tuoi tho | Books in storage: 10 | Author's Name: Nguyen Nhat Anh | Book ID: MS1800 | Books's Price : 85.0 | Day of production: 12/07/2020 | Customer's review: Review| Rent Book Number: 2| Rent Price: 20.0| Rent-day: 15/02/2023| Return-day: 15/12/2023
+---RENT BOOK---| Type of book: Thieu Nhi | Book's Name: Cho toi mot ve di tuoi tho | Books in storage: 10 | Author's Name: Nguyen Nhat Anh | Book ID: MS1800 | Books's Price : 85.0 | Day of production: 12/07/2020 | Customer's review: Review| Rent Book Number: 2| Rent Price: 0.0| Rent-day: 15/02/2023| Return-day: 15/12/2023
 
----RENT BOOK---| Type of book: Kinh Di | Book's Name: IT | Books in storage: 8 | Author's Name: Stephen King | Book ID: MS1803 | Books's Price : 105.0 | Day of production: 02/03/1986 | Customer's review: Review| Rent Book Number: 5| Rent Price: 12.0| Rent-day: 10/05/2023| Return-day: 10/09/2023
+---RENT BOOK---| Type of book: Kinh Di | Book's Name: IT | Books in storage: 8 | Author's Name: Stephen King | Book ID: MS1803 | Books's Price : 105.0 | Day of production: 02/03/1986 | Customer's review: Review| Rent Book Number: 5| Rent Price: 0.0| Rent-day: 10/05/2023| Return-day: 10/09/2023
 
