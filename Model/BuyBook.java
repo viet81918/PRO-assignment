@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class BuyBook extends Book {
     protected int SoldBookNumber;
+    public static int current_id = 0;
         
     public BuyBook(){
         

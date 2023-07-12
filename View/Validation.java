@@ -10,8 +10,17 @@ import Model.Book;
 import Model.Customer;
 import java.util.Scanner;
 public class Validation {
-    public static Scanner scanner;
-    
+    public static Scanner scanner = new Scanner(System.in);
+    public static int getValidIntegerInput() {
+        while (true) {
+            String input = scanner.nextLine();
+            if (input.matches("\\d+")) {
+                return Integer.parseInt(input);
+            } else {
+                System.out.println("Invalid input. Please enter a valid positive integer.");
+            }
+        }
+    }
     public static String getValidStringInput() {
     String input;
     while (true) {

@@ -12,9 +12,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 import java.util.function.Predicate;
 
+import Model.Book;
 import Model.BuyBook;
 import Model.BuyCustomer;
 import Model.RentBook;
@@ -24,7 +26,7 @@ public class Admin {
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<RentCustomer> Rcuslist = new ArrayList<>();
     static ArrayList<BuyCustomer> Bcuslist = new ArrayList<>();
-    public static ArrayList<BuyBook> Bbooklist = new ArrayList<>();
+    static ArrayList<BuyBook> Bbooklist = new ArrayList<>();
     static ArrayList<RentBook> Rbooklist = new ArrayList<>();
     static ArrayList<String> bookReview = new ArrayList<>();
 
@@ -54,6 +56,22 @@ public class Admin {
                     Double.parseDouble(data[5]), (java.util.Date) parseDate(data[6]), Integer.parseInt(data[7]),
                     data[8]);
             Bbooklist.add(book);
+        }
+    }
+
+    public static void deleteBook(List<Book> listBooks) {
+        String bookName = listBooks.get(0).getBookName();
+        for (int i = 0; i < Bbooklist.size(); i++) {
+            if (Bbooklist.get(i).getBookName().equals(bookName)) {
+                Bbooklist.remove(i);
+                break;
+            }
+        }
+        for (int i = 0; i < Rbooklist.size(); i++) {
+            if (Rbooklist.get(i).getBookName().equals(bookName)) {
+                Rbooklist.remove(i);
+                break;
+            }
         }
     }
 
@@ -178,7 +196,7 @@ public class Admin {
         return rentbookfind;
     }
 
-    public <T> ArrayList<T> searchRentCustomer(Predicate<Object> p) {
+    public static <T> ArrayList<T> searchRentCustomer(Predicate<Object> p) {
         ArrayList<T> cuslistfind = new ArrayList<>();
         for (Object cus : Rcuslist) {
             if (p.test(cus))
@@ -187,7 +205,7 @@ public class Admin {
         return cuslistfind;
     }
 
-    public <T> ArrayList<T> searchBuyCustomer(Predicate<Object> p) {
+    public static <T> ArrayList<T> searchBuyCustomer(Predicate<Object> p) {
         ArrayList<T> cuslistfind = new ArrayList<>();
         for (Object cus : Bcuslist) {
             if (p.test(cus))

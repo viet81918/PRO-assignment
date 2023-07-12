@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public abstract class Book  {
     Scanner scanner = new Scanner(System.in);
-    private int BookNumber;
+    private static int BookNumber;
     private String BookType;
     private String BookName;
     private String AuthorName;
@@ -33,16 +33,16 @@ public abstract class Book  {
     }
  
 
-    public int getBookNumber() {
+    public static int getBookNumber() {
         return BookNumber;
     }
 
-    public void setBookNumber(int BookNumber) {
-        this.BookNumber = BookNumber;
+    public static void setBookNumber(int bn) {
+        BookNumber = bn;
     }
      
     public String getBookType() {
-        return BookType ;
+        return this.BookType ;
     }
 
     public void setBookType(String BookType) {
@@ -50,7 +50,7 @@ public abstract class Book  {
     }
     
     public String getBookName() {
-        return BookName ;
+        return this.BookName ;
     }
 
     public void setBookName(String BookName) {
@@ -58,7 +58,7 @@ public abstract class Book  {
     }
 
     public String getName() {
-        return AuthorName;
+        return this.AuthorName;
     }
 
     public void setName(String AuthorName) {
@@ -66,14 +66,14 @@ public abstract class Book  {
     }
     
     public String getBookID(){
-        return BookID;
+        return this.BookID;
     }
     
     public void setBookID(String BookID){
         this.BookID=BookID;
     }
     public String getReview(){
-        return Review;
+        return this.Review;
     }
     
     public void setReview(String Review){
@@ -81,7 +81,7 @@ public abstract class Book  {
     }
 
     public double getPrice() {
-        return Price;
+        return this.Price;
     }
 
     public void setPrice(double Price) {
@@ -90,7 +90,7 @@ public abstract class Book  {
    
 
     public Date getDob() {
-        return Dob;
+        return this.Dob;
     }
 
     public void setDob(Date Dob) {
