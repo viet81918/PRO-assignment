@@ -39,6 +39,15 @@ public class CustomerManage  {
         System.out.println("Không tìm thấy sach có mã số " + bookid);
     }
     }
+    public void addcusID(Customer c) {
+        cuslist.add(c);
+    }
+    public void addBooktoBuy(BuyBook bb) {
+        Buylist.add(bb);
+    }
+    public void addBooktoRent(RentBook rb) {
+        Rentlist.add(rb);
+    }
 
     public  ArrayList<Customer> search(Predicate<Object> p) {
         ArrayList<Customer> cuslistfind=new ArrayList<>();
@@ -70,6 +79,16 @@ public class CustomerManage  {
             System.out.println(rb.getBookNumber());
         }
         }
+    public void printPriceBuy() {
+        for(BuyBook bb:Buylist) {
+            System.out.println(bb.getBuyPrice());
+        }
+    }
+    public void printPriceRent() {
+        for(RentBook rb:Rentlist) {
+            System.out.println(rb.getRentPrice());
+        }
+    }
 
    
     public void BuyNum(BuyBook bb) {

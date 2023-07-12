@@ -4,18 +4,19 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.text.ParseException;
 
 public class Submenu extends Menu {
 
     @Override
-    public void execute(int n) {
+    public void execute(int n) throws ParseException {
         String subMenu[]={"Nhan Vien","Khach Hang"};
         
         Menu m;
         m = new Menu("----------",subMenu) {
 
             @Override
-            public void execute(int n) {
+            public void execute(int n) throws ParseException {
                 switch (n){
                         case 1:{
                             cusRentBuy();
@@ -31,7 +32,7 @@ public class Submenu extends Menu {
             m.run();
     }
 
-    public void cusRentBuy(){
+    public void cusRentBuy() throws ParseException{
         String rentBuyMenu[]={"Rent Book","Buy Book","Book review","Exit"};
         
         Menu m;
@@ -60,7 +61,7 @@ public class Submenu extends Menu {
             m.run();
     }
 
-    public void staffMenu(){
+    public void staffMenu() throws ParseException{
         String staffMenu[]={"...","...","..."};
 
         Menu m;

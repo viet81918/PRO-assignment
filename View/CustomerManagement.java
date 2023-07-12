@@ -1,5 +1,6 @@
 package View;
 
+import java.text.ParseException;
 import java.util.Scanner;
 
 
@@ -12,14 +13,14 @@ public class CustomerManagement {
         sc = new Scanner(System.in);
     }
 
-    public void cusMenu() {
+    public void cusMenu() throws ParseException {
         String search[] = { "Tìm kiếm thể loại", "Tìm kiếm tên sách", "Tìm kiếm theo tác giả", "Tìm kiếm theo giá tiền",
                 "Tìm kiếm theo năm xuất bản" };
 
         Menu m;
         m = new Menu("Finding Book", search) {
             @Override
-            public void execute(int n) {
+            public void execute(int n) throws ParseException {
                 switch (n) {
                     case 1: {
                         bookType();
@@ -50,13 +51,13 @@ public class CustomerManagement {
         m.run();
     }
 
-    public void bookType() {
+    public void bookType() throws ParseException {
         String bookType[] = { "Thieu Nhi", "Khoa Hoc", "Lich Su", "Kinh Di", "Quay Lai" };
 
         Menu m;
         m = new Menu("Choose type", bookType) {
             @Override
-            public void execute(int n) {
+            public void execute(int n) throws ParseException {
                 switch (n) {
                     case 1: {
                         break;
@@ -79,14 +80,14 @@ public class CustomerManagement {
         };
         m.run();
     }
-    public void bokkPrice(){
+    public void bokkPrice() throws ParseException{
         String bookPrice[] = {"20k -> 50k","50k -> 70k","70k -> 100k","Tren 100k","Quay lai"};
 
         Menu m;
         m = new Menu("Choose type", bookPrice) {
             @Override
-            public void execute(int n) {
-                switch () {
+            public void execute(int n) throws ParseException {
+                switch (n) {
                     case 1: {
                         break;
                     }
