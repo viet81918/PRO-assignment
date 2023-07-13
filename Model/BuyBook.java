@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class BuyBook extends Book {
     protected int SoldBookNumber;
-    public static int current_id = 0;
+
         
     public BuyBook(){
         
     }
     
 
-    public BuyBook(String BookType, String BookName, String AuthorName, String BookID, int BookNumber, double Price, Date Dob,int SoldBookNumber, String Review) {
-        super(BookType, BookName, AuthorName, BookID, Price, Dob, Review, BookNumber);
+    public BuyBook(String BookType, String BookName, String AuthorName, int BookNumber, double Price, Date Dob,int SoldBookNumber, String Review) {
+        super(BookType, BookName, AuthorName, Price, Dob, Review, BookNumber);
         this.SoldBookNumber=SoldBookNumber;
     }
 

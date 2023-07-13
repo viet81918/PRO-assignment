@@ -13,11 +13,19 @@ import Controller.Admin;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-
 public class BookStore<T> {
     static Scanner scanner = new Scanner(System.in);
     static Admin admin = new Admin();
-
+    public BookStore() {
+        try {
+        admin.addReadObject("RentCustomer.txt");
+        admin.addReadObject("BuyCustomer.txt");
+        admin.addReadObject("BuyBook.txt");
+        admin.addReadObject("RentBook.txt");
+        } catch (NumberFormatException | ParseException ex) {
+            ex.printStackTrace();
+        }
+    }
     public void Menu() throws ParseException {
         String[] mc = { "ADMIN MENU", "CUSTOMER MENU", };
         Menu m = new Menu("====== MENU =====", mc) {
@@ -94,7 +102,7 @@ public class BookStore<T> {
             @Override
             public void execute(int n) {
                 switch (n) {
-                    case 1 -> {searchBuy();}
+                    case 1 -> {searchBuyBook();}
                     case 2 -> {searchRentBook();}
                     default -> System.out.println("Invalid choice. Please try again.");
                 }
@@ -103,10 +111,10 @@ public class BookStore<T> {
             menu.run();
         }
 
-    private void searchBuy() {
+    private void searchBuyBook() {
             System.out.print("Enter Book Name: ");
             String name = scanner.nextLine().trim();
-            List<BuyBook> results = Admin.searchBuyBook(p -> ((BuyBook) p).getBookName().startsWith(name));
+            List<BuyBook> results = Admin.searchBuyBook(p -> ((Book) p).getBookName().startsWith(name));
             display(results);
     }
     private void searchRentBook() {
@@ -129,16 +137,7 @@ public class BookStore<T> {
                 menu.run();
         }
 
-    public static String getNameType(String typeName) throws ParseException  {
-        StringBuilder res = new StringBuilder();
-        res.append(typeName.charAt(0)); 
-        for(int i = 1; i < typeName.length();i ++) {
-            if(typeName.charAt(i) == ' ') {
-                res.append(typeName.charAt(i + 1));
-            }
-        }
-        return res.toString().toUpperCase();
-    }  
+    
 
     public static void addBook() throws ParseException  {
         System.out.println(" +----ADDING BOOK----+");
@@ -149,7 +148,7 @@ public class BookStore<T> {
         System.out.println("Enter author name: ");
         String authorname = scanner.nextLine();
         BuyBook.current_id++;
-        final BuyBook b = new BuyBook(type,bookname, authorname,getNameType(type) + String.valueOf(BuyBook.current_id),0,0,parseDate("00/00/0000"), 0,"");
+        final BuyBook b = new BuyBook(type,bookname, authorname,0,0,parseDate("00/00/0000"), 0,"");
         Book.setBookNumber(BuyBook.current_id);
         Admin.addBbook(b);
     }

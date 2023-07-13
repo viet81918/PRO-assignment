@@ -21,12 +21,12 @@ import Model.BuyBook;
 import Model.BuyCustomer;
 import Model.RentBook;
 import Model.RentCustomer;
-
+import Controller.CustomerManage;
 public class Admin {
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<RentCustomer> Rcuslist = new ArrayList<>();
     static ArrayList<BuyCustomer> Bcuslist = new ArrayList<>();
-    static ArrayList<BuyBook> Bbooklist = new ArrayList<>();
+    public static ArrayList<BuyBook> Bbooklist = new ArrayList<>();
     static ArrayList<RentBook> Rbooklist = new ArrayList<>();
     static ArrayList<String> bookReview = new ArrayList<>();
 
@@ -52,28 +52,14 @@ public class Admin {
         String line;
         while ((line = reader.readLine()) != null) {
             String[] data = line.split(";");
-            BuyBook book = new BuyBook(data[0], data[1], data[2], data[3], Integer.parseInt(data[4]),
-                    Double.parseDouble(data[5]), (java.util.Date) parseDate(data[6]), Integer.parseInt(data[7]),
-                    data[8]);
+            BuyBook book = new BuyBook(data[0], data[1], data[2], Integer.parseInt(data[3]),
+                    Double.parseDouble(data[4]), (java.util.Date) parseDate(data[5]), Integer.parseInt(data[6]),
+                    data[7]);
             Bbooklist.add(book);
         }
     }
 
-    public static void deleteBook(List<Book> listBooks) {
-        String bookName = listBooks.get(0).getBookName();
-        for (int i = 0; i < Bbooklist.size(); i++) {
-            if (Bbooklist.get(i).getBookName().equals(bookName)) {
-                Bbooklist.remove(i);
-                break;
-            }
-        }
-        for (int i = 0; i < Rbooklist.size(); i++) {
-            if (Rbooklist.get(i).getBookName().equals(bookName)) {
-                Rbooklist.remove(i);
-                break;
-            }
-        }
-    }
+    
 
     private static void addBcuslist(BufferedReader reader) throws IOException {
         String line;
@@ -93,9 +79,9 @@ public class Admin {
             // Process each line as needed
             // Assuming rent book data is comma-separated
             String[] data = line.split(";");
-            RentBook book = new RentBook(data[0], data[1], data[2], data[3], Double.parseDouble(data[4]),
-                    parseDate(data[5]), data[6], Integer.parseInt(data[7]),
-                    Integer.parseInt(data[8]), data[9], data[10]);
+            RentBook book = new RentBook(data[0], data[1], data[2], Double.parseDouble(data[3]),
+                    parseDate(data[4]), data[5], Integer.parseInt(data[6]),
+                    Integer.parseInt(data[7]), data[8], data[9]);
             Rbooklist.add(book);
         }
     }
@@ -168,8 +154,10 @@ public class Admin {
             System.out.println(rentBook.toString());
         }
     }
-
-    public static void addBbook(BuyBook b) {
+    
+    
+    public static void addBbook(BuyBook b) throws ParseException {
+        b.setBookID(b.getBookType() +  String.valueOf(b.current_id));
         Bbooklist.add(b);
     }
 
@@ -253,6 +241,33 @@ public class Admin {
             System.out.println(data);
         }
         }
+    public static void deleteBook(List<Book> listBooks) {
+        String bookName = listBooks.get(0).getBookName();
+        for (int i = 0; i < Bbooklist.size(); i++) {
+            if (Bbooklist.get(i).getBookName().equals(bookName)) {
+                Bbooklist.remove(i);
+                break;
+            }
+        }
+        for (int i = 0; i < Rbooklist.size(); i++) {
+            if (Rbooklist.get(i).getBookName().equals(bookName)) {
+                Rbooklist.remove(i);
+                break;
+            }
+        }
+    }
+    public static void writeRbooklist(ArrayList<RentBook> books) throws IOException, ParseException {
+        String bookFilePath = System.getProperty("user.dir") + File.separator + "RentedBook.txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(bookFilePath, true))) {
+            for (RentBook book : books) {
+                String bookInfo = book.getBookType() + book.getBookID() + " | " + book.getBookName() + " | " +
+                        book.getRentDay() + " | " + book.getReturnDay();
+                writer.write(bookInfo);
+                writer.newLine();
+            }
+        }
+    }
+    
 
     public static void main(String[] args) throws Exception {
         addReadObject("RentCustomer.txt");
@@ -262,12 +277,7 @@ public class Admin {
         writeBooksToFile();
         writeCustomersToFile();
         SortSoldBook();
-        ArrayList<String> bookReview = readBookReview();
-        String Name = scanner.nextLine();
-        String Review = scanner.nextLine();
-        addBookReview(bookReview, Name, Review);
-        printBookReview(bookReview);
-        writeBookReview(bookReview);
+        writeRbooklist(Rbooklist);
 
     }
 

@@ -10,6 +10,10 @@ public abstract class Customer {
     public Customer(){
         super();
     }
+    public Customer(String ID) {
+        super();
+        this.ID=ID;
+    }
     
 
     public Customer(String ID, int BookNumber,String Review) {
@@ -52,5 +56,4 @@ public abstract class Customer {
             "| Customer's review: " + Review ;
     }
 }
-
 

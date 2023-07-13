@@ -1,4 +1,3 @@
-
 package Controller;
 
 import Model.BuyBook;
@@ -15,7 +14,7 @@ import java.util.function.Predicate;
 public class CustomerManage  {
     ArrayList<Customer> cuslist;
     ArrayList<BuyBook> Buylist;
-    ArrayList<RentBook> Rentlist;
+    static ArrayList<RentBook> Rentlist;
     public CustomerManage() {
         cuslist = new ArrayList<>();
         Buylist= new ArrayList<>();
@@ -38,6 +37,15 @@ public class CustomerManage  {
     if (!found) {
         System.out.println("Không tìm thấy sach có mã số " + bookid);
     }
+    }
+    public void addcusID(Customer c) {
+        cuslist.add(c);
+    }
+    public void addBooktoBuy(BuyBook bb) {
+        Buylist.add(bb);
+    }
+    public void addBooktoRent(RentBook rb) {
+        Rentlist.add(rb);
     }
 
     public  ArrayList<Customer> search(Predicate<Object> p) {
@@ -70,6 +78,16 @@ public class CustomerManage  {
             System.out.println(rb.getBookNumber());
         }
         }
+    public void printPriceBuy() {
+        for(BuyBook bb:Buylist) {
+            System.out.println(bb.getBuyPrice());
+        }
+    }
+    public void printPriceRent() {
+        for(RentBook rb:Rentlist) {
+            System.out.println(rb.getRentPrice());
+        }
+    }
 
    
     public void BuyNum(BuyBook bb) {
