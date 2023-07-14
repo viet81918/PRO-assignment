@@ -22,7 +22,7 @@ public class CustomerManage  {
                 
     }
     
-    public void deleteIDBook(String bookid) {
+    public void deleteIDBook(String bookid) throws ParseException {
           Iterator<BuyBook> iterator = Buylist.iterator();
     boolean found = false;
     while (iterator.hasNext()) {
@@ -96,7 +96,7 @@ public class CustomerManage  {
             System.out.println(bb.getBookNumber());
         }
        }
-    public void printBuybook(String id) {
+    public void printBuybook(String id) throws ParseException {
         Buylist=searchBuybook((BuyBook bb)->bb.getBookID().equalsIgnoreCase(id));
         for (Iterator it = Buylist.iterator(); it.hasNext();) {
             BuyBook b = (BuyBook) it.next();
@@ -112,7 +112,7 @@ public class CustomerManage  {
     }
     
 
-    public void checkIddiscount(String id) {
+    public void checkIddiscount(String id) throws ParseException {
             double price;
             BuyBook bb=new BuyBook ();
             ArrayList<Customer> cusdisc;

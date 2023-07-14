@@ -70,7 +70,7 @@ public class BookStore<T> {
                         // sortBook();
                         break;
                     case 6:
-                        // printSale();
+                         printSale();
                         break;
                     case 7:
                         // printRentedBook();
@@ -79,7 +79,7 @@ public class BookStore<T> {
                         // printBoughtBook();
                         break;
                     case 9:
-                        // displayAll();
+                        displayAll();
                         break;
                     case 10:
                         // writeToFile();
@@ -96,6 +96,9 @@ public class BookStore<T> {
         m.run();
     }
 
+    protected void displayAll() {
+        admin.getAllBooks();
+    }
     public void findBooks() throws ParseException{
         String[] mc = new String[] { "Search Buy books","Search Rent books"};
         Menu menu = new Menu("Book Searching",mc ){
@@ -114,13 +117,13 @@ public class BookStore<T> {
     private void searchBuyBook() {
             System.out.print("Enter Book Name: ");
             String name = scanner.nextLine().trim();
-            List<BuyBook> results = Admin.searchBuyBook(p -> ((Book) p).getBookName().startsWith(name));
+            List<BuyBook> results = Admin.searchBuyBook1(p -> ((Book) p).getBookName().startsWith(name));
             display(results);
     }
     private void searchRentBook() {
             System.out.print("Enter Book Name: ");
             String name = scanner.nextLine().trim();
-            List<RentBook> results = Admin.searchRentBook(p -> ((Book) p).getBookName().startsWith(name));
+            List<RentBook> results = Admin.searchRentBook1(p -> ((Book) p).getBookName().startsWith(name));
             display(results);
         }
     private void addBookAndDelete() throws ParseException{
@@ -147,22 +150,21 @@ public class BookStore<T> {
         String bookname = scanner.nextLine();
         System.out.println("Enter author name: ");
         String authorname = scanner.nextLine();
-        BuyBook.current_id++;
-        final BuyBook b = new BuyBook(type,bookname, authorname,0,0,parseDate("00/00/0000"), 0,"");
-        Book.setBookNumber(BuyBook.current_id);
+        BuyBook b = new BuyBook(type,bookname, authorname,0,0,parseDate("00/00/0000"), 0,"");
+        b.setBookNumber(b.getBookNumber()+1);
         Admin.addBbook(b);
     }
 
 
     private void deleteBook() {
-        System.out.println(" +----DELETING BOOK----+");
-        System.out.println("Enter Book Name: ");
-        String name = scanner.nextLine().trim();
-        List<Book> results = Admin.searchBuyBook(p -> ((Book) p).getBookName().startsWith(name));
-        Admin.deleteBook(results);
-        Book.setBookNumber(Book.getBookNumber() - results.size());
-        System.out.println("+-------------------------------+");
-        System.out.println("Deleted book successfully");
+        // System.out.println(" +----DELETING BOOK----+");
+        // System.out.println("Enter Book Name: ");
+        // String name = scanner.nextLine().trim();
+        // List<Book> results = Admin.searchBuyBook1(p -> ((Book) p).getBookName().startsWith(name));
+        // Admin.deleteBook(results);
+        // Book.setBookNumber(Book.getBookNumber() - results.size());
+        // System.out.println("+-------------------------------+");
+        // System.out.println("Deleted book successfully");
     }
 
     public void searchCustomer() throws ParseException {
@@ -200,7 +202,18 @@ public class BookStore<T> {
     }
 
     public double printSale(){
-        return 0;
+        System.out.print("Enter Book Name want to find sale: ");
+        String Name = scanner.nextLine().trim();
+        double sale = 0;
+        List<RentBook> results1 = admin.searchRentBook1(p -> ((Book) p).getName().startsWith(Name));
+        List<BuyBook> results2 = admin.searchBuyBook1(p -> ((Book) p).getName().startsWith(Name));
+        for (BuyBook book : results2){
+            sale = book.getBuyPrice();
+        }
+        for (RentBook book : results1){
+            sale = book.getRentPrice();
+        }
+        return sale;
 
     }
 

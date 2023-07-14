@@ -14,13 +14,12 @@ public class RentBook extends Book {
     private Date ReturnDay;
     private int RentBookNumber;
     
-    public RentBook(){
-        
+    public RentBook() throws ParseException{
     }
     
     
  
-    public RentBook(String BookType, String BookName, String AuthorName, double Price , Date Dob, String Review , int BookNumber, int RentBookNumber, String RentDay, String ReturnDay) {
+    public RentBook(String BookType, String BookName, String AuthorName, double Price , Date Dob, String Review , int BookNumber, int RentBookNumber, String RentDay, String ReturnDay) throws ParseException {
     super(BookType, BookName, AuthorName, Price, Dob, Review, BookNumber);
     this.RentBookNumber=RentBookNumber;
    

@@ -1,17 +1,14 @@
 package Model;
 
+import java.text.ParseException;
 import java.util.Date;
 
 public class BuyBook extends Book {
     protected int SoldBookNumber;
-
         
-    public BuyBook(){
-        
-    }
-    
+    public BuyBook() throws ParseException{}
 
-    public BuyBook(String BookType, String BookName, String AuthorName, int BookNumber, double Price, Date Dob,int SoldBookNumber, String Review) {
+    public BuyBook(String BookType, String BookName, String AuthorName, int BookNumber, double Price, Date Dob,int SoldBookNumber, String Review) throws ParseException {
         super(BookType, BookName, AuthorName, Price, Dob, Review, BookNumber);
         this.SoldBookNumber=SoldBookNumber;
     }

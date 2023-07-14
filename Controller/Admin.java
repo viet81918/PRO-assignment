@@ -157,12 +157,10 @@ public class Admin {
     
     
     public static void addBbook(BuyBook b) throws ParseException {
-        b.setBookID(b.getBookType() +  String.valueOf(b.current_id));
         Bbooklist.add(b);
     }
 
     public double SumPrice(RentBook rb, BuyBook b) {
-
         return rb.getRentPrice() + b.getBuyPrice();
     }
 
@@ -175,7 +173,7 @@ public class Admin {
         });
     }
 
-    public static <T> ArrayList<T> searchRentBook(Predicate<Object> p) {
+    public static <T> ArrayList<T> searchRentBook1(Predicate<Object> p) {
         ArrayList<T> rentbookfind = new ArrayList<>();
         for (Object renbok : Rbooklist) {
             if (p.test(renbok))
@@ -202,7 +200,7 @@ public class Admin {
         return cuslistfind;
     }
 
-    public static <T> ArrayList<T> searchBuyBook(Predicate<Object> p) {
+    public static <T> ArrayList<T> searchBuyBook1(Predicate<Object> p) {
         ArrayList<T> cuslistfind = new ArrayList<>();
         for (Object cus : Bbooklist) {
             if (p.test(cus))
@@ -284,5 +282,14 @@ public class Admin {
     private static Date parseDate(String dateStr) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.parse(dateStr);
+    }
+
+    public static void getAllBooks() {
+        for (BuyBook book : Bbooklist){
+            System.out.println(book.toString());
+        }
+        for (RentBook book : Rbooklist){
+            System.out.println(book.toString());
+        }
     }
 }

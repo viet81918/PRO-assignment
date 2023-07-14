@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public abstract class Book  {
     Scanner scanner = new Scanner(System.in);
-    private static int BookNumber;
+    private  int BookNumber;
     private String BookType;
     private String BookName;
     private String AuthorName;
@@ -16,12 +16,12 @@ public abstract class Book  {
     private  String Review;
     private  double Price;
     private Date Dob;
-    public  int current_id = 0;
+    public static int current_id = 0;
     
-    public Book(){
+    public Book() throws ParseException{
         super();
     }
-    public Book (String BookType,String BookName, String AuthorName, double Price, Date Dob, String Review, int BookNumber) {
+    public Book (String BookType,String BookName, String AuthorName, double Price, Date Dob, String Review, int BookNumber) throws ParseException {
         super();
         this.BookNumber=BookNumber;
         this.BookType = BookType;
@@ -30,19 +30,19 @@ public abstract class Book  {
         this.Price = Price;
         this.Review=Review;
         this.Dob = Dob;
-        
+        setBookID(this.getBookType());
     }
  
 
     public  int getBookNumber() {
-        return BookNumber;
+        return this.BookNumber;
     }
 
-    public  void setBookNumber(int bn) {
-        BookNumber = bn;
+    public void setBookNumber(int bn) {
+        this.BookNumber = bn;
     }
      
-    public   String getBookType() {
+    public String getBookType() {
         return this.BookType ;
     }
 
@@ -70,7 +70,7 @@ public abstract class Book  {
         setBookID(getBookType());
         return this.BookID;
     }
-    public  String getNameType(String typeName) throws ParseException  {
+    public static String getNameType(String typeName) throws ParseException  {
         StringBuilder res = new StringBuilder();
         res.append(typeName.charAt(0)); 
         for(int i = 1; i < typeName.length();i ++) {
@@ -81,7 +81,8 @@ public abstract class Book  {
         return res.toString().toUpperCase();
     }  
     public void setBookID(String BookType) throws ParseException{
-        this.BookID=getNameType(BookType)+ this.current_id;
+        Book.current_id ++;
+        this.BookID=getNameType(BookType)+ Book.current_id;
     }
     public String getReview(){
         return this.Review;
