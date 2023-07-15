@@ -3,6 +3,10 @@ package Controller;
 import Model.BuyBook;
 import Model.Customer;
 import Model.RentBook;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,7 +18,7 @@ import java.util.function.Predicate;
 public class CustomerManage  {
     ArrayList<Customer> cuslist;
     ArrayList<BuyBook> Buylist;
-    static ArrayList<RentBook> Rentlist;
+    public static ArrayList<RentBook> Rentlist;
     public CustomerManage() {
         cuslist = new ArrayList<>();
         Buylist= new ArrayList<>();
@@ -108,6 +112,29 @@ public class CustomerManage  {
         for (Iterator it = Rentlist.iterator(); it.hasNext();) {
             RentBook b = (RentBook) it.next();
             System.out.println(b.getRentPrice());
+        }
+    }
+    public boolean writefile(String path) throws ParseException {
+        try {
+            
+            BufferedWriter bw=new BufferedWriter(new FileWriter(path));
+            for(RentBook book:Rentlist) {
+                String line=book.getBookType() + book.getBookID() + " | " + book.getBookName() + " | " +
+                book.getRentDay() + " | " + book.getReturnDay();
+                bw.write(line);
+                bw.newLine();
+            }
+                bw.close();
+               
+            return true;
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Không tìm thấy file hoặc không có quyền truy cập đọc file.");
+//            e.printStackTrace();
+//            return false;
+       } catch (IOException ex) {
+            System.out.println("Xảy ra sự cố khi đọc file. Có thể file đang được mở hoặc bị hỏng.");
+            ex.printStackTrace();
+            return false;
         }
     }
     

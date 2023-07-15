@@ -16,21 +16,30 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.function.Predicate;
 
+import java.util.Iterator;
 import Model.Book;
 import Model.BuyBook;
 import Model.BuyCustomer;
+import Model.Customer;
 import Model.RentBook;
 import Model.RentCustomer;
 import Controller.CustomerManage;
 public class Admin {
     static Scanner scanner = new Scanner(System.in);
-    static ArrayList<RentCustomer> Rcuslist = new ArrayList<>();
-    static ArrayList<BuyCustomer> Bcuslist = new ArrayList<>();
-    public static ArrayList<BuyBook> Bbooklist = new ArrayList<>();
-    static ArrayList<RentBook> Rbooklist = new ArrayList<>();
-    static ArrayList<String> bookReview = new ArrayList<>();
+    private ArrayList<RentCustomer> Rcuslist;
+    private ArrayList<BuyCustomer> Bcuslist;
+    private ArrayList<BuyBook> Bbooklist  ;
+    private ArrayList<RentBook> Rbooklist ;
+    private ArrayList<String> bookReview ;
+    public  Admin (){
+         Rcuslist = new ArrayList<>();
+    Bcuslist = new ArrayList<>();
+     Bbooklist = new ArrayList<>();
+     Rbooklist = new ArrayList<>();
+     bookReview = new ArrayList<>();
+    }
 
-    public static void addReadObject(String fileName) throws NumberFormatException, ParseException {
+    public void addReadObject(String fileName) throws NumberFormatException, ParseException {
         String path = System.getProperty("user.dir") + File.separator + fileName;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
@@ -48,7 +57,7 @@ public class Admin {
         }
     }
 
-    private static void addBbooklist(BufferedReader reader) throws IOException, NumberFormatException, ParseException {
+    private  void addBbooklist(BufferedReader reader) throws IOException, NumberFormatException, ParseException {
         String line;
         while ((line = reader.readLine()) != null) {
             String[] data = line.split(";");
@@ -61,7 +70,7 @@ public class Admin {
 
     
 
-    private static void addBcuslist(BufferedReader reader) throws IOException {
+    private  void addBcuslist(BufferedReader reader) throws IOException {
         String line;
         while ((line = reader.readLine()) != null) {
             // Process each line as needed
@@ -73,7 +82,7 @@ public class Admin {
         }
     }
 
-    private static void addRbooklist(BufferedReader reader) throws IOException, NumberFormatException, ParseException {
+    private void addRbooklist(BufferedReader reader) throws IOException, NumberFormatException, ParseException {
         String line;
         while ((line = reader.readLine()) != null) {
             // Process each line as needed
@@ -81,12 +90,12 @@ public class Admin {
             String[] data = line.split(";");
             RentBook book = new RentBook(data[0], data[1], data[2], Double.parseDouble(data[3]),
                     parseDate(data[4]), data[5], Integer.parseInt(data[6]),
-                    Integer.parseInt(data[7]), data[8], data[9]);
+                    Integer.parseInt(data[7]), Double.parseDouble(data[8]),data[9], data[10]);
             Rbooklist.add(book);
         }
     }
 
-    private static void addRcuslist(BufferedReader reader) throws IOException {
+    private void addRcuslist(BufferedReader reader) throws IOException {
         String line;
         while ((line = reader.readLine()) != null) {
             // Process each line as needed
@@ -98,7 +107,7 @@ public class Admin {
         }
     }
 
-    public static void writeBooksToFile() {
+    public void writeBooksToFile() {
         String bookFilePath = System.getProperty("user.dir") + File.separator + "Book.txt";
         File bookFile = new File(bookFilePath);
 
@@ -117,7 +126,7 @@ public class Admin {
         }
     }
 
-    public static void writeCustomersToFile() {
+    public void writeCustomersToFile() {
         String customerFilePath = System.getProperty("user.dir") + File.separator + "Customer.txt";
         File customerFile = new File(customerFilePath);
 
@@ -136,7 +145,7 @@ public class Admin {
         }
     }
 
-    public static void delRentBook(RentBook book, RentCustomer RentCustomer) {
+    public void delRentBook(RentBook book, RentCustomer RentCustomer) {
         Rbooklist.remove(book);
         RentCustomer.setBookNumber(RentCustomer.getBookNumber() - 1);
         if (RentCustomer.getBookNumber() < 0) {
@@ -144,19 +153,19 @@ public class Admin {
         }
     }
 
-    public static void addRbooklist(RentBook book,RentCustomer customer) {
+    public void addRbooklist(RentBook book,RentCustomer customer) {
         Rbooklist.add(book);
         customer.setBookNumber(customer.getBookNumber() + 1);
     }
 
-    public static void printlnRbooklist(RentBook book) {
+    public void printlnRbooklist(RentBook book) {
         for (RentBook rentBook : Rbooklist) {
             System.out.println(rentBook.toString());
         }
     }
     
     
-    public static void addBbook(BuyBook b) throws ParseException {
+    public void addBbook(BuyBook b) throws ParseException {
         Bbooklist.add(b);
     }
 
@@ -164,7 +173,7 @@ public class Admin {
         return rb.getRentPrice() + b.getBuyPrice();
     }
 
-    public static void SortSoldBook() {
+    public void SortSoldBook() {
         Collections.sort(Bbooklist, new Comparator<BuyBook>() {
             @Override
             public int compare(BuyBook book1, BuyBook book2) {
@@ -174,7 +183,7 @@ public class Admin {
         );
     }
 
-    public static <T> ArrayList<T> searchRentBook1(Predicate<Object> p) {
+    public <T> ArrayList<T> searchRentBook1(Predicate<Object> p) {
         ArrayList<T> rentbookfind = new ArrayList<>();
         for (Object renbok : Rbooklist) {
             if (p.test(renbok))
@@ -182,8 +191,7 @@ public class Admin {
         }
         return rentbookfind;
     }
-
-    public static <T> ArrayList<T> searchRentCustomer(Predicate<Object> p) {
+    public <T> ArrayList<T> searchRentCustomer(Predicate<Object> p) {
         ArrayList<T> cuslistfind = new ArrayList<>();
         for (Object cus : Rcuslist) {
             if (p.test(cus))
@@ -192,7 +200,7 @@ public class Admin {
         return cuslistfind;
     }
 
-    public static <T> ArrayList<T> searchBuyCustomer(Predicate<Object> p) {
+    public  <T> ArrayList<T> searchBuyCustomer(Predicate<Object> p) {
         ArrayList<T> cuslistfind = new ArrayList<>();
         for (Object cus : Bcuslist) {
             if (p.test(cus))
@@ -201,16 +209,16 @@ public class Admin {
         return cuslistfind;
     }
 
-    public static <T> ArrayList<T> searchBuyBook1(Predicate<Object> p) {
-        ArrayList<T> cuslistfind = new ArrayList<>();
-        for (Object cus : Bbooklist) {
+    public ArrayList<BuyBook> searchBuyBook1(Predicate<BuyBook> p) {
+        ArrayList<BuyBook> buybookfind = new ArrayList<>();
+        for (BuyBook cus : Bbooklist) {
             if (p.test(cus))
-                cuslistfind.add((T) cus);
+                buybookfind.add(cus);
         }
-        return cuslistfind;
+        return buybookfind;
     }
 
-    public static ArrayList<String> readBookReview() throws IOException {
+    public  ArrayList<String> readBookReview() throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader("Review.txt"))) {
             String line;
             while ((line = reader.readLine()) !=null) {
@@ -222,7 +230,7 @@ public class Admin {
         }
         return bookReview;
     }
-    public static void writeBookReview(ArrayList<String> bookReview) throws IOException {
+    public void writeBookReview(ArrayList<String> bookReview) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("Review.txt"))) {
             for (String data : bookReview) {
                 writer.write(data);
@@ -231,31 +239,28 @@ public class Admin {
         }
     }
 
-    public static void addBookReview(ArrayList<String> bookReview, String bookName, String review) {
+    public void addBookReview(ArrayList<String> bookReview, String bookName, String review) {
         String data = bookName + ";" + review;
         bookReview.add(data);
     }
-    public static void printBookReview(ArrayList<String> bookReview) {
+    public void printBookReview(ArrayList<String> bookReview) {
             for (String data : bookReview) {
             System.out.println(data);
         }
         }
-    public static void deleteBook(List<Book> listBooks) {
-        String bookName = listBooks.get(0).getBookName();
-        for (int i = 0; i < Bbooklist.size(); i++) {
-            if (Bbooklist.get(i).getBookName().equals(bookName)) {
-                Bbooklist.remove(i);
-                break;
+        public boolean deleteBook(String name) throws ParseException {
+            boolean deleted = false;
+            for (Iterator<BuyBook> iterator = Bbooklist.iterator(); iterator.hasNext();) {
+                BuyBook b = iterator.next();
+                if (b.getBookID().equals(name)) {
+                    iterator.remove();
+                    deleted = true;
+                }
             }
+            return deleted;
         }
-        for (int i = 0; i < Rbooklist.size(); i++) {
-            if (Rbooklist.get(i).getBookName().equals(bookName)) {
-                Rbooklist.remove(i);
-                break;
-            }
-        }
-    }
-    public static void writeRbooklist(ArrayList<RentBook> books) throws IOException, ParseException {
+        
+    public void writeRbooklist(ArrayList<RentBook> books) throws IOException, ParseException {
         String bookFilePath = System.getProperty("user.dir") + File.separator + "RentedBook.txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(bookFilePath, true))) {
             for (RentBook book : books) {
@@ -268,24 +273,13 @@ public class Admin {
     }
     
 
-    public static void main(String[] args) throws Exception {
-        addReadObject("RentCustomer.txt");
-        addReadObject("BuyCustomer.txt");
-        addReadObject("BuyBook.txt");
-        addReadObject("RentBook.txt");
-        writeBooksToFile();
-        writeCustomersToFile();
-        SortSoldBook();
-        writeRbooklist(Rbooklist);
 
-    }
-
-    private static Date parseDate(String dateStr) throws ParseException {
+    private  Date parseDate(String dateStr) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.parse(dateStr);
     }
 
-    public static void getAllBooks() {
+    public void getAllBooks() {
         for (BuyBook book : Bbooklist){
             System.out.println(book.toString());
         }

@@ -66,11 +66,11 @@ public abstract class Book  {
         this.AuthorName = AuthorName;
     }
     
-    public String getBookID() throws ParseException{
+    public String getBookID() {
         setBookID(getBookType());
         return this.BookID;
     }
-    public static String getNameType(String typeName) throws ParseException  {
+    public static String getNameType(String typeName)  {
         StringBuilder res = new StringBuilder();
         res.append(typeName.charAt(0)); 
         for(int i = 1; i < typeName.length();i ++) {
@@ -80,7 +80,7 @@ public abstract class Book  {
         }
         return res.toString().toUpperCase();
     }  
-    public void setBookID(String BookType) throws ParseException{
+    public void setBookID(String BookType) {
         Book.current_id ++;
         this.BookID=getNameType(BookType)+ Book.current_id;
     }

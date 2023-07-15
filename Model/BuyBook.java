@@ -22,7 +22,7 @@ public class BuyBook extends Book {
     }
 
     public double getBuyPrice() {
-        return SoldBookNumber*getPrice();
+        return getSoldBookNumber()*getPrice();
     }
 
 

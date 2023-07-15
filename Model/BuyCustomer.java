@@ -1,6 +1,7 @@
 package Model;
 
 public class BuyCustomer extends Customer  {
+   
     private double BuyPrice;
     private int SoldBookNumber;
     
