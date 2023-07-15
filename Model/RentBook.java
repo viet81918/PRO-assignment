@@ -15,10 +15,8 @@ public class RentBook extends Book {
     private int RentBookNumber;
     
     public RentBook() throws ParseException{
+
     }
-    
-    
- 
     public RentBook(String BookType, String BookName, String AuthorName, double Price , Date Dob, String Review , int BookNumber, int RentBookNumber, double RentPrice, String RentDay, String ReturnDay) throws ParseException {
     super(BookType, BookName, AuthorName, Price, Dob, Review, BookNumber);
         this.RentPrice= RentPrice ;
@@ -51,14 +49,14 @@ private Date parseDate(String dateString) throws ParseException {
         this.RentPrice=RentBookNumber*(getPrice()-70/100);
     }
       public Date getRentDay() {
-        return RentDay;
+        return this.RentDay;
     }
 
     public void setRentDay(Date RentDay) {
         this.RentDay = RentDay;
     }
       public Date getReturnDay() {
-        return ReturnDay;
+        return this.ReturnDay;
     }
 
     public void setReturnDay(Date ReturnDay) {

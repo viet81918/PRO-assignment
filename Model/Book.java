@@ -67,7 +67,6 @@ public abstract class Book  {
     }
     
     public String getBookID() {
-        setBookID(getBookType());
         return this.BookID;
     }
     public static String getNameType(String typeName)  {

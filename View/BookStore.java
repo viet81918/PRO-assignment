@@ -9,6 +9,7 @@ import Model.RentCustomer;
 import View.Menu;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import Controller.Admin;
@@ -22,12 +23,13 @@ public class BookStore<T> {
     static Scanner scanner = new Scanner(System.in);
     static Admin admin = new Admin();
     private final CustomerManage cm = new CustomerManage();
-    public BookStore() {
+    public BookStore() throws IOException {
         try {
         admin.addReadObject("RentCustomer.txt");
         admin.addReadObject("BuyCustomer.txt");
         admin.addReadObject("BuyBook.txt");
         admin.addReadObject("RentBook.txt");
+        cm.addRbooklist();
         } catch (NumberFormatException | ParseException ex) {
             ex.printStackTrace();
         }
@@ -52,9 +54,8 @@ public class BookStore<T> {
 
     public void AdminMenu() throws ParseException {
         String[] mc = { "Tim kiem sach", "Them sach va xoa danh sach mua","Tim kiem thong tin khach hang",
-                
                 "Phan loai cac dau sach ban chay", "In tong doanh thu",
-                "In sach co nguoi thue", "In sach da ban duoc", "Hien thi tat ca thong tin sach",
+                "In sach co nguoi thue",  "Hien thi tat ca thong tin sach","Hien thi tat ca thong tin khach hang ",
                 "Viet du lieu khach hang va sach vao file" };
         Menu m = new Menu("Customer Management", mc) {
             @Override
@@ -80,10 +81,10 @@ public class BookStore<T> {
                         
                         break;
                     case 7:
-                        // printBoughtBook();
+                        displayAllBook();
                         break;
                     case 8:
-                        displayAll();
+                        displayAllCustomer();
                         break;
                     case 9:
                     writeData();
@@ -100,8 +101,11 @@ public class BookStore<T> {
         m.run();
     }
 
-    protected void displayAll() {
+    protected void displayAllBook() {
         admin.getAllBooks();
+    }
+    protected void displayAllCustomer(){
+        admin.getAllCustomer();
     }
     public void findBooks() throws ParseException{
         String[] mc = new String[] { "Search Buy books","Search Rent books"};
@@ -232,7 +236,10 @@ public class BookStore<T> {
                     public void execute(int n) throws ParseException {
                         switch (n) {
                         case 1 -> addBook();
-                        case 2 -> deleteBook();
+                        case 2 -> {
+                            String input = getValue(" Input Id want to delete :");
+                            admin.deleteIDBook(input);
+                        }
                         default -> System.out.println("Invalid choice. Please try again.");
                     }
                     }
@@ -248,6 +255,10 @@ public class BookStore<T> {
             }
         }
 
+// private void writeData(){
+//     admin.writeBooksToFile();
+//     admin.writeCustomersToFile();
+// }
     
 
     public static void addBook() throws ParseException  {
@@ -258,16 +269,17 @@ public class BookStore<T> {
         String bookname = scanner.nextLine();
         System.out.println("Enter author name: ");
         String authorname = scanner.nextLine();
-        BuyBook b = new BuyBook(type,bookname, authorname,0,0,parseDate("00/00/0000"), 0,"");
+        System.out.println(" Enter Price  :");
+        String price = scanner.nextLine().trim();
+        BuyBook b = new BuyBook(type,bookname, authorname,0,Integer.parseInt(price),parseDate("00/00/0000"), 0,"");
+        RentBook r = new RentBook(type, bookname, authorname, Integer.parseInt(price), parseDate("00/00/0000"),"", 0, 0, 0, "00/00/0000", "00/00/0000") ;
         b.setBookNumber(b.getBookNumber()+1);
-        admin.addBbook(b);
+        r.setBookNumber(r.getBookNumber()+1);
+        admin.addbook(b,r);
+
     }
 
-
-    private void deleteBook() {
-       
-    }
-
+    
     public void searchCustomer() throws ParseException {
         Menu menu = new Menu("Search Customer Information", new String[] { "Search for Buy Customers","Search for Rent Customers"} ){
             @Override
@@ -363,11 +375,3 @@ public class BookStore<T> {
     }
 }
 
- // System.out.println(" +----DELETING BOOK----+");
-        // System.out.println("Enter Book Name: ");
-        // String name = scanner.nextLine().trim();
-        // List<Book> results = admin.searchBuyBook1(p -> ((Book) p).getBookName().startsWith(name));
-        // admin.deleteBook(results);
-        // Book.setBookNumber(Book.getBookNumber() - results.size());
-        // System.out.println("+-------------------------------+");
-        // System.out.println("Deleted book successfully");

@@ -23,16 +23,17 @@ import Model.BuyCustomer;
 import Model.Customer;
 import Model.RentBook;
 import Model.RentCustomer;
+import View.BookStore;
 import Controller.CustomerManage;
 public class Admin {
     static Scanner scanner = new Scanner(System.in);
-    private ArrayList<RentCustomer> Rcuslist;
+    private static ArrayList<RentCustomer> Rcuslist;
     private ArrayList<BuyCustomer> Bcuslist;
     private ArrayList<BuyBook> Bbooklist  ;
     private ArrayList<RentBook> Rbooklist ;
     private ArrayList<String> bookReview ;
     public  Admin (){
-         Rcuslist = new ArrayList<>();
+    Rcuslist = new ArrayList<>();
     Bcuslist = new ArrayList<>();
      Bbooklist = new ArrayList<>();
      Rbooklist = new ArrayList<>();
@@ -110,7 +111,6 @@ public class Admin {
     public void writeBooksToFile() {
         String bookFilePath = System.getProperty("user.dir") + File.separator + "Book.txt";
         File bookFile = new File(bookFilePath);
-
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(bookFile))) {
             for (BuyBook book : Bbooklist) {
                 writer.write(book.toString());
@@ -144,7 +144,7 @@ public class Admin {
             e.printStackTrace();
         }
     }
-
+  
     public void delRentBook(RentBook book, RentCustomer RentCustomer) {
         Rbooklist.remove(book);
         RentCustomer.setBookNumber(RentCustomer.getBookNumber() - 1);
@@ -164,9 +164,36 @@ public class Admin {
         }
     }
     
-    
-    public void addBbook(BuyBook b) throws ParseException {
+    public void deleteIDBook(String bookid) throws ParseException {
+          Iterator<BuyBook> iterator = Bbooklist.iterator();
+          Iterator<RentBook> iterator2 = Rbooklist.iterator();
+    boolean found = false;
+    while (iterator.hasNext()) {
+        BuyBook cus = iterator.next();
+        if (cus.getBookID().contains(bookid)) {
+            iterator.remove();
+            System.out.println("Sach co mã số " + bookid + " đã được xóa.");
+            found = true;
+            break;
+        }
+    }
+    while (iterator2.hasNext()) {
+        RentBook cus = iterator2.next();
+        if (cus.getBookID().contains(bookid)) {
+            iterator2.remove();
+            System.out.println("Sach co mã số " + bookid + " đã được xóa.");
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        System.out.println("Không tìm thấy sach có mã số " + bookid);
+    }
+    }
+    public void addbook(BuyBook b, RentBook r) throws ParseException {
         Bbooklist.add(b);
+        Rbooklist.add(r);
     }
 
     public double SumPrice(RentBook rb, BuyBook b) {
@@ -181,6 +208,19 @@ public class Admin {
             }
         }
         );
+        int count = 0;
+        for (BuyBook book : Bbooklist) {
+            if (count >= 5) {
+                break; // Stop after printing the top 5 books
+            }
+            System.out.println("Book ID: " + book.getBookID());
+            System.out.println("Book Name: " + book.getBookName());
+            System.out.println("Sold Book Number: " + book.getSoldBookNumber());
+            System.out.println("Revenue: " + (book.getBuyPrice()));
+            System.out.println("--------------------------------");
+    
+            count++;
+        }
     }
 
     public <T> ArrayList<T> searchRentBook1(Predicate<Object> p) {
@@ -287,4 +327,14 @@ public class Admin {
             System.out.println(book.toString());
         }
     }
+    
+    public void getAllCustomer() {
+        for (BuyCustomer cus : Bcuslist){
+            System.out.println(cus.toString());
+        }
+        for (RentCustomer cus : Rcuslist){
+            System.out.println(cus.toString());
+        }
+    }
+
 }

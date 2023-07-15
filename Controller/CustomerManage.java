@@ -4,7 +4,10 @@ import Model.BuyBook;
 import Model.Customer;
 import Model.RentBook;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
@@ -23,6 +26,7 @@ public class CustomerManage  {
         cuslist = new ArrayList<>();
         Buylist= new ArrayList<>();
         Rentlist=new ArrayList<>();
+        
                 
     }
     
@@ -51,7 +55,21 @@ public class CustomerManage  {
     public void addBooktoRent(RentBook rb) {
         Rentlist.add(rb);
     }
-
+    public void addRbooklist() throws IOException, NumberFormatException, ParseException {
+        String path = System.getProperty("user.dir") + File.separator +"RentBook.txt";
+        String line;
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+        while ((line = reader.readLine()) != null) {
+            // Process each line as needed
+            // Assuming rent book data is comma-separated
+            String[] data = line.split(";");
+            RentBook book = new RentBook(data[0], data[1], data[2], Double.parseDouble(data[3]),
+                    parseDate(data[4]), data[5], Integer.parseInt(data[6]),
+                    Integer.parseInt(data[7]), Double.parseDouble(data[8]), data[9], data[10]);
+            Rentlist.add(book);
+        }
+    }
+}
     public  ArrayList<Customer> search(Predicate<Object> p) {
         ArrayList<Customer> cuslistfind=new ArrayList<>();
             for(Customer cus: cuslist) {
@@ -116,16 +134,14 @@ public class CustomerManage  {
     }
     public boolean writefile(String path) throws ParseException {
         try {
-            
             BufferedWriter bw=new BufferedWriter(new FileWriter(path));
             for(RentBook book:Rentlist) {
-                String line=book.getBookType() + book.getBookID() + " | " + book.getBookName() + " | " +
-                book.getRentDay() + " | " + book.getReturnDay();
+                String line=book.getBookType()+" | " + book.getBookID() + " | " + book.getBookName() + " | " +
+                getDateFormat(book.getRentDay()) + " | " + getDateFormat(book.getReturnDay());
                 bw.write(line);
                 bw.newLine();
             }
                 bw.close();
-               
             return true;
 //        } catch (FileNotFoundException e) {
 //            System.out.println("Không tìm thấy file hoặc không có quyền truy cập đọc file.");
@@ -168,6 +184,10 @@ public class CustomerManage  {
     public static Date parseDate(String dateStr) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.parse(dateStr);
+    }
+    private String getDateFormat(Date date) {
+        SimpleDateFormat df=new SimpleDateFormat("dd/mm/yyyy");
+        return df.format(date);
     }
     
 }
