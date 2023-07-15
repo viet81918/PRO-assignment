@@ -170,7 +170,8 @@ public class Admin {
             public int compare(BuyBook book1, BuyBook book2) {
                 return Integer.compare(book2.getSoldBookNumber(), book1.getSoldBookNumber());
             }
-        });
+        }
+        );
     }
 
     public static <T> ArrayList<T> searchRentBook1(Predicate<Object> p) {

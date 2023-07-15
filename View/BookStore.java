@@ -103,29 +103,109 @@ public class BookStore<T> {
         String[] mc = new String[] { "Search Buy books","Search Rent books"};
         Menu menu = new Menu("Book Searching",mc ){
             @Override
-            public void execute(int n) {
+            public void execute(int n) throws ParseException {
                 switch (n) {
-                    case 1 -> {searchBuyBook();}
-                    case 2 -> {searchRentBook();}
-                    default -> System.out.println("Invalid choice. Please try again.");
+                    case 1:
+                        searchBuyBook();
+                        break;
+                    case 2:
+                        searchRentBook();
+                        break;
+                    default: System.out.println("Invalid choice. Please try again.");
                 }
             }
             };
             menu.run();
         }
 
-    private void searchBuyBook() {
+    private void searchBuyBook() throws ParseException{
+                String[] mc = new String[] { "Search Buy books By Name","Search Buy books By Type","Search Buy Books By Author Name "};
+        Menu menu = new Menu("Buy Book Searching",mc ){
+                    @Override
+                    public void execute(int n) {
+                        switch (n) {
+                        case 1:
+                            searchBuyBookByName();
+                        break;
+                        case 2:
+                            searchBuyBookByType();
+                            break;
+                        case 3:
+                            searchBuyBookByAuthor();
+                            break;
+                        default: System.out.println("Invalid choice. Please try again.");
+                }
+
+                    
+                    }
+    };
+        menu.run();
+}
+    
+    
+    
+    
+    private void searchBuyBookByName() {
             System.out.print("Enter Book Name: ");
             String name = scanner.nextLine().trim();
             List<BuyBook> results = Admin.searchBuyBook1(p -> ((Book) p).getBookName().startsWith(name));
             display(results);
     }
-    private void searchRentBook() {
+     private void searchBuyBookByType() {
+            System.out.print("Enter Book Type: ");
+            String type = scanner.nextLine().trim();
+            List<BuyBook> results = Admin.searchBuyBook1(p -> ((Book) p).getBookType().startsWith(type));
+            display(results);
+    }
+     private void searchBuyBookByAuthor() {
+            System.out.print("Enter Book Auhtor Name: ");
+            String aName = scanner.nextLine().trim();
+            List<BuyBook> results = Admin.searchBuyBook1(p -> ((Book) p).getName().startsWith(aName));
+            display(results);
+    }
+    
+    
+    private void searchRentBook() throws ParseException{
+        String[] mc = new String[] { "Search Rent books By Name","Search Rent books By Type","Search Rent Books By Author Name "};
+        Menu menu = new Menu("Buy Book Searching",mc ){
+                    @Override
+                    public void execute(int n) {
+                        switch (n) {
+                        case 1:
+                            searchRentBookByName();
+                        break;
+                        case 2:
+                            searchRentBookByType();
+                            break;
+                        case 3:
+                            searchRentBookByAuthor();
+                            break;
+                        default: System.out.println("Invalid choice. Please try again.");
+                }
+
+                    
+                    }
+    };
+        menu.run();
+    }
+    private void searchRentBookByName() {
             System.out.print("Enter Book Name: ");
             String name = scanner.nextLine().trim();
             List<RentBook> results = Admin.searchRentBook1(p -> ((Book) p).getBookName().startsWith(name));
             display(results);
         }
+    private void searchRentBookByType(){
+            System.out.print("Enter Book Type: ");
+            String type = scanner.nextLine().trim();
+            List<RentBook> results = Admin.searchRentBook1(p -> ((Book) p).getBookType().startsWith(type));
+            display(results);
+    }
+    private void searchRentBookByAuthor(){
+            System.out.print("Enter Book Auhtor Name: ");
+            String aName = scanner.nextLine().trim();
+            List<BuyBook> results = Admin.searchRentBook1(p -> ((Book) p).getName().startsWith(aName));
+            display(results);
+    }
     private void addBookAndDelete() throws ParseException{
                 Menu menu = new Menu("Change Book Information", new String[] { "Add books","Delete books"} ) {
                     @Override
