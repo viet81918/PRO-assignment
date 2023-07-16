@@ -22,6 +22,18 @@ public class Validation {
             }
         }
     }
+    public boolean isDouble(String input) {
+        try {
+            Double.parseDouble(input);
+            
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    
+    }
+
+    
 
     public static double getValidDoubleInput() {
         while (true) {
@@ -38,7 +50,7 @@ public class Validation {
     String input;
     while (true) {
         input = scanner.nextLine();
-        if (!input.isEmpty() && Pattern.matches("[a-zA-Z]+", input)) {
+        if (!input.isEmpty() && Pattern.matches("[a-z A-Z]+", input)) {
             return input;
         } else {
             System.out.println("Invalid input. Please enter a valid non-empty string without special characters or digits.");
@@ -61,39 +73,28 @@ public class Validation {
     
 }
 }
-
-public static boolean checkBookID(String ID) {
+ public static boolean checkType(String Type1) {
+    String Type = Type1.toUpperCase();
     // Kiểm tra trường hợp empty input
-    if (ID.isEmpty()) {
+    if (Type.isEmpty()) {
         System.out.println("ID is empty.");
         return false;
     }
     // Kiểm tra ID theo regex
-    String regex = "TN\\d{2}";
-    String regex1 = "LS\\d{2}";
-    String regex2 = "KH\\d{2}";
-    String regex3 = "KD\\d{2}";
-    if (ID.matches(regex) || ID.matches(regex1)|| ID.matches(regex2) || ID.matches(regex3)) {
+    String regex = "KINH DI";
+    String regex1 = "THIEU NHI";
+    String regex2 = "LICH SU";
+    String regex3 = "THIEU NHI";
+    String regex4 = "KHOA HOC";
+    if (Type.equalsIgnoreCase(regex) || Type.equalsIgnoreCase(regex1) || Type.equalsIgnoreCase(regex2) || Type.equalsIgnoreCase(regex3) || Type.equalsIgnoreCase(regex4)) {
         return true;
     } else {
-        System.out.println("Invalid ID format. ID must start with the first 2 characters of book type followed by 2 digits.");
+        System.out.println("Invalid BOOK TYPE format.");
         return false;
-}}
-    public static boolean checkSimilarBookAndID(Book b , String ID){
-    if (b.getBookType() == "Kinh Di" && ID.matches("KD\\d{2}")){
-        return true;
-    }
-    if (b.getBookType() == "Lich Su" && ID.matches("LS\\d{2}")){
-        return true;
-    }
-    if (b.getBookType() == "Khoa Hoc" && ID.matches("KH\\d{2}")){
-        return true;
-    }
-    if (b.getBookType() == "Thieu Nhi" && ID.matches("TN\\d{2}")){
-        return true;
-    }
-    return false;
+    
 }
+}
+
    
     public static String inputDay() {
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -110,4 +111,5 @@ public static boolean checkBookID(String ID) {
         }
     }
 }
+    
 }

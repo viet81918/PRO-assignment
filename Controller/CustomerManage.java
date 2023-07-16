@@ -24,7 +24,7 @@ public class CustomerManage  {
     private  ArrayList<BuyBook> Buylist;
     private ArrayList<RentBook> Rentlist;
     private Admin admin = new Admin();
-    public CustomerManage() throws FileNotFoundException {
+    public CustomerManage()  {
         cuslist = new ArrayList<>();
         Buylist= new ArrayList<>();
         Rentlist=new ArrayList<>();
@@ -186,6 +186,15 @@ public class CustomerManage  {
         } catch (ParseException ex) {
             java.util.logging.Logger.getLogger(Customer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+    }
+
+    Boolean checkNameBook(String bookName) {
+        for (BuyBook b : admin.getBbooklist()) {
+            if (b.getBookName().equalsIgnoreCase(bookName)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static Date parseDate(String dateStr) throws ParseException {

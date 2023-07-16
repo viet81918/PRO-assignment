@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public abstract class Book  {
     Scanner scanner = new Scanner(System.in);
-    private  int BookNumber;
+    protected  int BookNumber;
     private String BookType;
     private String BookName;
     private String AuthorName;
@@ -34,7 +34,7 @@ public abstract class Book  {
     }
  
 
-    public  int getBookNumber() {
+    public int getBookNumber() {
         return this.BookNumber;
     }
 
@@ -117,9 +117,9 @@ public abstract class Book  {
         String dobString = dateFormat.format(Dob);
         return "| Type of book: " + BookType +
                 " | Book's Name: " + BookName +
-                " | Books in storage: " + BookNumber +
+                " | Books in storage: " + getBookNumber() +
                 " | Author's Name: " + AuthorName +  
-                " | Book ID: " + getBookID() + 
+                " | Book ID: " + BookID + 
                 " | Books's Price : " + Price +
                 " | Day of production: " + dobString + 
                 " | Customer's review: " + Review 

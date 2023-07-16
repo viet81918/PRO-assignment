@@ -19,16 +19,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+
+import View.Validation;
+
 public class BookStore<T> {
     static Scanner scanner = new Scanner(System.in);
-    private Admin admin = new Admin();
-    private final CustomerManage cm = new CustomerManage();
-    private final CustomerManagement cm1 = new CustomerManagement();
-    public BookStore() throws IOException , ParseException {
-       
+    static Admin admin = new Admin();
+    static Validation val = new Validation();
+    private final static CustomerManage cm = new CustomerManage();
+    private CustomerManagement cm1 = new CustomerManagement();
+    private ReviewManagement sm = new ReviewManagement();
+    public BookStore() throws IOException {
+        
     }
-    public void Menu() throws ParseException {
-        String[] mc = { "ADMIN MENU", "CUSTOMER MENU" };
+    public void Menu()  throws IOException, ParseException{
+        String[] mc = { "ADMIN MENU", "CUSTOMER MENU", "REVIEW MANAGEMENT"};
         Menu m = new Menu("====== MENU =====", mc) {
             @Override
             public void execute(int n) throws ParseException {
@@ -39,8 +44,11 @@ public class BookStore<T> {
                     case 2:
                         cm1.run();
                         break;
-                    default:
+                    case 3 : 
+                    sm.run();
                         break;
+                    default:
+                    break;
                 }
             }
         };
@@ -52,35 +60,35 @@ public class BookStore<T> {
                 "Phan loai cac dau sach ban chay", "In tong doanh thu",
                 "Viet du lieu khach hang va sach vao file",  "Hien thi tat ca thong tin sach","Hien thi tat ca thong tin khach hang ",
                  };
-        Menu m = new Menu("Customer Management", mc) {
+        Menu m = new Menu("Admin Management", mc) {
             @Override
             public void execute(int n) throws ParseException {
                 switch (n) {
-                    case 1:
+                    case 1:{
                         findBooks();
-                        break;
+                        break;}
                     case 2:
-                        addBookAndDelete();
-                        break;
+                        {addBookAndDelete();
+                        break;}
                     case 3:
-                        searchCustomer();
-                        break;
+                        {searchCustomer();
+                        break;}
                     
                     case 4:
-                        printBestSeller();
-                        break;
+                        {printBestSeller();
+                        break;}
                     case 5:
-                         printSale();
-                        break;
+                        {printSale();
+                        break;}
                     case 6:
-                        writeData();
-                        break;
+                       { writeData();
+                        break;}
                     case 7:
-                        displayAllBook();
-                        break;
+                        {displayAllBook();
+                        break;}
                     case 8:
-                        displayAllCustomer();
-                        break;
+                        {displayAllCustomer();
+                        break;}
                     default:
                         break;
                 }
@@ -124,16 +132,23 @@ public class BookStore<T> {
                 public void execute(int n) {
                     switch (n) {
                         case 1:
-                            String name = getValue("Enter name: ");
-                            bl = admin.searchBuyBook1(b -> (b).getBookName().equalsIgnoreCase(name));
+                            System.out.println("Enter Book Name");
+                            String name = val.getValidStringInput();
+                            bl = admin.searchBuyBook1(b -> ((BuyBook) b).getBookName().equalsIgnoreCase(name));
                             break;
                         case 2:
-                            String type = getValue("Enter type: ");
-                            bl = admin.searchBuyBook1(b -> b.getBookType().equalsIgnoreCase(type));
+                            String type=" ";
+                            do{
+                            System.out.println("Enter Book Type");
+                            type = val.getValidStringInput();
+                            } while(!val.checkType(type));
+                            final String Type = type;
+                            bl = admin.searchBuyBook1(b -> b.getBookType().equalsIgnoreCase(Type));
                             break;
                         case 3:
-                            String aname = getValue("Enter Author name: ");
-                            bl = admin.searchBuyBook1(b -> ( b).getName().equalsIgnoreCase(aname));
+                            System.out.println("Enter Author Name");
+                            String aname = val.getValidStringInput();
+                            bl = admin.searchBuyBook1(b -> ((BuyBook) b).getName().equalsIgnoreCase(aname));
                             break;
                         default:
                             System.out.println("Invalid choice. Please try again.");
@@ -185,7 +200,7 @@ public class BookStore<T> {
                         switch (n) {
                         case 1:
                             searchRentBookByName();
-                        break;
+                            break;
                         case 2:
                             searchRentBookByType();
                             break;
@@ -202,19 +217,23 @@ public class BookStore<T> {
     }
     private void searchRentBookByName() {
             System.out.print("Enter Book Name: ");
-            String name = scanner.nextLine().trim();
+            String name = val.getValidStringInput();
             List<RentBook> results = admin.searchRentBook1(p -> ((Book) p).getBookName().startsWith(name));
             display(results);
         }
     private void searchRentBookByType(){
-            System.out.print("Enter Book Type: ");
-            String type = scanner.nextLine().trim();
-            List<RentBook> results = admin.searchRentBook1(p -> ((Book) p).getBookType().startsWith(type));
+            String type=" ";
+            do{
+            System.out.println("Enter Book Type");
+            type = val.getValidStringInput();
+            } while(!val.checkType(type));
+            final String Type = type;
+            List<RentBook> results = admin.searchRentBook1(p -> ((Book) p).getBookType().startsWith(Type));
             display(results);
     }
     private void searchRentBookByAuthor(){
             System.out.print("Enter Book Auhtor Name: ");
-            String aName = scanner.nextLine().trim();
+            String aName = val.getValidStringInput();
             List<RentBook> results = admin.searchRentBook1(p -> ((Book) p).getName().startsWith(aName));
             display(results);
     }
@@ -223,12 +242,14 @@ public class BookStore<T> {
                     @Override
                     public void execute(int n) throws ParseException {
                         switch (n) {
-                        case 1 -> addBook();
-                        case 2 -> {
-                            String input = getValue(" Input Id want to delete :");
-                            admin.deleteIDBook(input);
+                        case 1 : 
+                            addBook();
+                            break;
+                        case 2 :{
+                            String id = val.getValidStringInput();
+                            admin.deleteIDBook(id);
                         }
-                        default -> System.out.println("Invalid choice. Please try again.");
+                        default : System.out.println("Invalid choice. Please try again.");
                     }
                     }
                 };    
@@ -251,19 +272,29 @@ private void writeData(){
 
     public  void addBook() throws ParseException  {
         System.out.println(" +----ADDING BOOK----+");
-        System.out.println("Enter book type: ");
-        String type = scanner.nextLine();
+        String type=" ";
+        do{
+        System.out.println("Enter Book Type");
+        type = val.getValidStringInput();
+        } while(!val.checkType(type));
         System.out.println("Enter book name: ");
-        String bookname = scanner.nextLine();
+        String bookname = val.getValidStringInput();
+        if (cm.checkNameBook(bookname)){
         System.out.println("Enter author name: ");
-        String authorname = scanner.nextLine();
+        String authorname = val.getValidStringInput();
+        String price = " ";
+        do{
         System.out.println(" Enter Price  :");
-        String price = scanner.nextLine().trim();
-        BuyBook b = new BuyBook(type,bookname, authorname,0,Integer.parseInt(price),parseDate("00/00/0000"), 0,"");
-        RentBook r = new RentBook(type, bookname, authorname, Integer.parseInt(price), parseDate("00/00/0000"),"", 0, 0, 0, "00/00/0000", "00/00/0000") ;
+        price = scanner.nextLine();
+        }while(!val.isDouble(price)|| Double.parseDouble(price)<0);
+        BuyBook b = new BuyBook(type,bookname, authorname,0,Double.parseDouble(price),parseDate("00/00/0000"), 0,"");
+        RentBook r = new RentBook(type, bookname, authorname,Double.parseDouble(price),parseDate("00/00/0000"),"", 0, 0, 0, "00/00/0000", "00/00/0000") ;
         b.setBookNumber(b.getBookNumber()+1);
         r.setBookNumber(r.getBookNumber()+1);
         admin.addbook(b,r);
+    } else {
+        System.out.println("Book is a ready have, Book in storage +1");
+    } 
 
     }
 
@@ -273,9 +304,13 @@ private void writeData(){
             @Override
             public void execute(int n) {
                     switch (n) {
-                    case 1 -> searchBuyCustomer();
-                    case 2 -> searchRentCustomer();
-                    default -> System.out.println("Invalid choice. Please try again.");
+                    case 1 :
+                         searchBuyCustomer();
+                         break;
+                    case 2:
+                        searchRentCustomer();
+                        break;
+                    default : System.out.println("Invalid choice. Please try again.");
                 }
             }
             };  
@@ -284,15 +319,24 @@ private void writeData(){
 
 
     public void searchBuyCustomer(){
+        String id = " ";
+            do{
             System.out.print("Enter Customer ID: ");
-            String id = scanner.nextLine().trim();
-            List<BuyCustomer> results = admin.searchBuyCustomer(p -> ((Customer) p).getID().startsWith(id));
+            id = scanner.nextLine().trim();
+            } while(val.checkID(id));
+            final String cusID = id;
+            List<BuyCustomer> results = admin.searchBuyCustomer(p -> ((Customer) p).getID().startsWith(cusID));
             display(results);
+        
     }
     public void searchRentCustomer(){
+            String id = " ";
+            do{
             System.out.print("Enter Customer ID: ");
-            String id = scanner.nextLine().trim();
-            List<RentCustomer> results = admin.searchRentCustomer(p -> ((Customer) p).getID().startsWith(id));
+            id = scanner.nextLine().trim();
+            } while(val.checkID(id));
+            final String cusID = id;
+            List<RentCustomer> results = admin.searchRentCustomer(p -> ((Customer) p).getID().startsWith(cusID));
             display(results);
     }
 
@@ -307,6 +351,7 @@ private void writeData(){
     public void printSale() {
     System.out.print("Enter Book Name you want to find sale: ");
     String name = scanner.nextLine().trim();
+
 
     ArrayList<RentBook> rentBooks = admin.searchRentBook1(p -> ((Book) p).getBookName().equalsIgnoreCase(name));
     ArrayList<BuyBook> buyBooks = admin.searchBuyBook1(p -> ((Book) p).getBookName().equalsIgnoreCase(name));
@@ -362,4 +407,3 @@ private void writeData(){
         System.out.println("Total : " + list.size() );
     }
 }
-

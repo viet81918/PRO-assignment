@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Predicate;
 
@@ -33,7 +35,7 @@ public class Admin {
     private  ArrayList<BuyBook> Bbooklist  ;
     private ArrayList<RentBook> Rbooklist ;
     private ArrayList<String> bookReview ;
-    public  Admin () {
+    public  Admin ()  {
     Rcuslist = new ArrayList<>();
     Bcuslist = new ArrayList<>();
      Bbooklist = new ArrayList<>();
@@ -44,11 +46,17 @@ public class Admin {
         addReadObject("BuyCustomer.txt");
         addReadObject("BuyBook.txt");
         addReadObject("RentBook.txt");
+        bookReview = readBookReview();
         } catch (NumberFormatException | ParseException ex) {
             ex.printStackTrace();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
 }
-
 
 
     public ArrayList<BuyBook> getBbooklist() {
@@ -241,9 +249,9 @@ public class Admin {
         System.out.println("Không tìm thấy sach có mã số " + bookid);
     }
     }
-    public void addbook(BuyBook b, RentBook r) throws ParseException {
-        Bbooklist.add(b);
+    public void addbook(BuyBook br, RentBook r) throws ParseException {
         Rbooklist.add(r);
+        Bbooklist.add(br);
     }
 
     public double SumPrice(RentBook rb, BuyBook b) {
@@ -263,10 +271,10 @@ public class Admin {
             if (count >= 5) {
                 break; // Stop after printing the top 5 books
             }
-            System.out.println("Book ID: " + book.getBookID());
-            System.out.println("Book Name: " + book.getBookName());
-            System.out.println("Sold Book Number: " + book.getSoldBookNumber());
-            System.out.println("Revenue: " + (book.getBuyPrice()));
+            System.out.print("| Book ID: " + book.getBookID());
+            System.out.print("| Book Name: " + book.getBookName());
+            System.out.print("| Sold Book Number: " + book.getSoldBookNumber());
+            System.out.println("| Revenue: " + (book.getBuyPrice()));
             System.out.println("--------------------------------");
     
             count++;
@@ -335,14 +343,19 @@ public class Admin {
         return buyBooksInRange;
     }
 
-    public  ArrayList<String> readBookReview() throws IOException {
+    public  ArrayList<String> readBookReview() throws FileNotFoundException, IOException  {
         try (BufferedReader reader = new BufferedReader(new FileReader("Review.txt"))) {
             String line;
-            while ((line = reader.readLine()) !=null) {
-                String[] data = line.split(";");
-                String bookName = data[0];
-                String review = data[1];
-                bookReview.add(bookName + ";" + review);
+            try {
+                while ((line = reader.readLine()) !=null) {
+                    String[] data = line.split(";");
+                    String bookName = data[0];
+                    String review = data[1];
+                    bookReview.add(bookName + ";" + review);
+                }
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
         }
         return bookReview;
@@ -368,8 +381,19 @@ public class Admin {
 
     public void addBookReview( String bookName, String review) {
         String data = bookName + ";" + review;
+        if(!checkNameBook(bookName))
         bookReview.add(data);
+        else System.out.println("Not book available");
     }
+    Boolean checkNameBook(String bookName) {
+        for (BuyBook b : Bbooklist) {
+            if (b.getBookName().equalsIgnoreCase(bookName)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void printBookReview() {
             for (String data : bookReview) {
             System.out.println(data);

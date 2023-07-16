@@ -13,7 +13,9 @@ import Model.RentBook;
 
 
 public class CustomerManagement extends Menu<String>   {
+
     static Scanner scanner = new Scanner(System.in);
+    static Validation val = new Validation();
     private Admin admin = new Admin();
     private final CustomerManage cm = new CustomerManage();
     static String[] me={"Want to buy.", "Want to hired."};
@@ -44,12 +46,12 @@ public class CustomerManagement extends Menu<String>   {
                         break;
                     }
                     case 3: {
-                        try {
-                            AddBuyintoBag();
-                        } catch (FileNotFoundException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
+                        // try {
+                        //     AddBuyintoBag();
+                        // } catch (FileNotFoundException e) {
+                        //     // TODO Auto-generated catch block
+                        //     e.printStackTrace();
+                        // }
                         break;
                     }
                     case 4: {
@@ -111,15 +113,18 @@ public class CustomerManagement extends Menu<String>   {
             public void execute(int n) throws ParseException {
                 switch (n) {
                     case 1:
-                        String name = getValue("Enter name: ");
+                        System.out.println("Enter Book Name:");
+                        String name = val.getValidStringInput();
                         bl = admin.searchBuyBook1(b -> ((BuyBook) b).getBookName().equalsIgnoreCase(name));
                         break;
                     case 2:
-                        String type = getValue("Enter type: ");
+                        System.out.println("Enter book type: ");
+                        String type = val.getValidStringInput();
                         bl = admin.searchBuyBook1(b -> b.getBookType().equalsIgnoreCase(type));
                         break;
                     case 3:
-                        String aname = getValue("Enter Author name: ");
+                        System.out.println("Enter Author Name: ");
+                        String aname = val.getValidStringInput();
                         bl = admin.searchBuyBook1(b -> ((BuyBook) b).getName().equalsIgnoreCase(aname));
                         break;
                     case 4 :
@@ -146,15 +151,22 @@ public class CustomerManagement extends Menu<String>   {
                 public void execute(int n) {
                     switch (n) {
                         case 1:
-                            String name = getValue("Enter name: ");
+                           System.out.println("Enter Book Name:");
+                            String name = val.getValidStringInput();
                             bl = admin.searchRentBook1(b -> ((RentBook) b).getBookName().equalsIgnoreCase(name));
                             break;
                         case 2:
-                            String type = getValue("Enter type: ");
-                            bl = admin.searchRentBook1(b -> ((RentBook)b).getBookType().equalsIgnoreCase(type));
+                            String type=" ";
+                                do{
+                            System.out.println("Enter Book Type");
+                             type = val.getValidStringInput();
+                            } while(!val.checkType(type));
+                            final String Type=type;
+                            bl = admin.searchRentBook1(b -> ((RentBook)b).getBookType().equalsIgnoreCase(Type));
                             break;
                         case 3:
-                            String aname = getValue("Enter Author name: ");
+                            System.out.println("Enter Author Name:");
+                            String aname = val.getValidStringInput();
                             bl = admin.searchRentBook1(b -> ((RentBook) b).getName().equalsIgnoreCase(aname));
                             break;
                         default:
@@ -194,18 +206,34 @@ public class CustomerManagement extends Menu<String>   {
 
                 switch (n) {
                     case 1 :
-                    String a = getValue("Gia thap nhat :");
-                    String b = getValue("Gia cao nhat : ");
+                    String a = " ";
+                    do{
+                    System.out.println(" Enter Lowest Price  :");
+                    a = scanner.nextLine();
+                    }while(!val.isDouble(a));
+                    String b = " ";
+                    do{
+                    System.out.println(" Enter Highest Price  :");
+                    b = scanner.nextLine();
+                    }while(!val.isDouble(b));
                     result = admin.searchBuyBookByPriceRange1(Double.parseDouble(a),Double.parseDouble(b));
                     Display(result);
                     break;
                     case 2 :
-                    String c = getValue("Gia toi thieu muon tim :");
-                    result = admin.searchBuyBookByPriceRange2(Double.parseDouble(c));
+                    String price = " ";
+                    do{
+                    System.out.println(" Nhap gia toi thieu muon tim  :");
+                    price = scanner.nextLine();
+                    }while(!val.isDouble(price));
+                    result = admin.searchBuyBookByPriceRange2(Double.parseDouble(price));
                     Display(result);
                     break;
                     case 3 :
-                    String d = getValue("Gia toi da muon tim ");
+                    String d = " ";
+                    do{
+                    System.out.println(" Nhap gia toi da muon tim :");
+                    d = scanner.nextLine();
+                    }while(!val.isDouble(d));
                     result = admin.searchBuyBookByPriceRange3(Double.parseDouble(d));
                     Display(result);
                     break;
@@ -217,8 +245,8 @@ public class CustomerManagement extends Menu<String>   {
 };menu.run();
     }
     private void AddBuyintoBag() throws FileNotFoundException, ParseException{
-        String id = getValue("Nhap id sach muon :");
-        Display(cm.addBooktoBuy(id));
+        // String id = getValue("Nhap id sach muon :");
+        // Display(cm.addBooktoBuy(id));
     }
     private void printBookReview(String id){
         admin.DisplayReviewByID(id);
