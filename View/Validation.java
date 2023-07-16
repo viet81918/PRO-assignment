@@ -11,6 +11,7 @@ import Model.Customer;
 import java.util.Scanner;
 public class Validation {
     public static Scanner scanner = new Scanner(System.in);
+
     public static int getValidIntegerInput() {
         while (true) {
             String input = scanner.nextLine();
@@ -21,6 +22,18 @@ public class Validation {
             }
         }
     }
+
+    public static double getValidDoubleInput() {
+        while (true) {
+            String input = scanner.nextLine();
+            if (input.matches("\\d+")) {
+                return Double.parseDouble(input);
+            } else {
+                System.out.println("Invalid input. Please enter a valid positive double.");
+            }
+        }
+    }
+
     public static String getValidStringInput() {
     String input;
     while (true) {
@@ -39,11 +52,11 @@ public class Validation {
         return false;
     }
     // Kiểm tra ID theo regex
-    String regex = "KH\\d{2}";
+    String regex = "KH\\d{3}";
     if (ID.matches(regex)) {
         return true;
     } else {
-        System.out.println("Invalid ID format. ID must start with 'KH' followed by 2 digits.");
+        System.out.println("Invalid ID format. ID must start with 'KH' followed by 3 digits.");
         return false;
     
 }
@@ -83,18 +96,17 @@ public static boolean checkBookID(String ID) {
 }
    
     public static String inputDay() {
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     dateFormat.setLenient(false);
 
     while (true) {
-        System.out.print("Enter Customer's return day (dd-MM-yyyy): ");
         String dob = scanner.nextLine();
 
         try {
             dateFormat.parse(dob);
             return dob;
         } catch (ParseException e) {
-            System.out.println("Invalid date format. Please enter date in dd-MM-yyyy format.");
+            System.out.println("Invalid date format. Please enter date in dd/MM/yyyy format.");
         }
     }
 }
