@@ -55,8 +55,8 @@ public class BookStore<T> {
     public void AdminMenu() throws ParseException {
         String[] mc = { "Tim kiem sach", "Them sach va xoa danh sach mua","Tim kiem thong tin khach hang",
                 "Phan loai cac dau sach ban chay", "In tong doanh thu",
-                "In sach co nguoi thue",  "Hien thi tat ca thong tin sach","Hien thi tat ca thong tin khach hang ",
-                "Viet du lieu khach hang va sach vao file" };
+                "Viet du lieu khach hang va sach vao file",  "Hien thi tat ca thong tin sach","Hien thi tat ca thong tin khach hang ",
+                 };
         Menu m = new Menu("Customer Management", mc) {
             @Override
             public void execute(int n) throws ParseException {
@@ -78,20 +78,13 @@ public class BookStore<T> {
                          printSale();
                         break;
                     case 6:
-                        
+                        writeData();
                         break;
                     case 7:
                         displayAllBook();
                         break;
                     case 8:
                         displayAllCustomer();
-                        break;
-                    case 9:
-                    writeData();
-                        break;
-                    case 10:
-                        break;
-                    case 11:
                         break;
                     default:
                         break;
@@ -246,19 +239,19 @@ public class BookStore<T> {
                 };    
                 menu.run();
         }
-        private void writeData() throws ParseException {
-            String bookFilePath = System.getProperty("user.dir") + File.separator + "RentedBook.txt";
-            if (cm.writefile(bookFilePath)) {
-                System.out.println("Success");
-            } else {
-                System.out.println("Error");
-            }
-        }
+        // private void writeData() throws ParseException {
+        //     String bookFilePath = System.getProperty("user.dir") + File.separator + "RentedBook.txt";
+        //     if (cm.writefile(bookFilePath)) {
+        //         System.out.println("Success");
+        //     } else {
+        //         System.out.println("Error");
+        //     }
+        // }
 
-// private void writeData(){
-//     admin.writeBooksToFile();
-//     admin.writeCustomersToFile();
-// }
+private void writeData(){
+    admin.writeBooksToFile();
+    admin.writeCustomersToFile();
+}
     
 
     public static void addBook() throws ParseException  {

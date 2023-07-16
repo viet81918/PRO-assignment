@@ -1,34 +1,33 @@
 package View;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import Controller.Admin;
+import Controller.CustomerManage;
+import Model.BuyBook;
 
 
 public class CustomerManagement {
-    private static Scanner sc;
-
-    //
-    //
+    static Scanner scanner = new Scanner(System.in);
+    static Admin admin = new Admin();
+    private final CustomerManage cm = new CustomerManage();
     public CustomerManagement() {
-        sc = new Scanner(System.in);
     }
 
     public void cusMenu() throws ParseException {
-        String search[] = { "Tìm kiếm thể loại", "Tìm kiếm tên sách", "Tìm kiếm theo tác giả", "Tìm kiếm theo giá tiền",
-                "Tìm kiếm theo năm xuất bản" };
-
-        Menu m;
-        m = new Menu("Finding Book", search) {
+        String search[] = {"Hien thi tat ca sach ", "Tim kiem sach "," Them sach vao gio hang ", "HIen thi sach trong gio ", " Hien thi nhung review da viet",  " Hien thi Muc giam gia " , " Viet review sau khi nhap ID sach" };
+        Menu m = new Menu("Customer Menu", search) {
             @Override
             public void execute(int n) throws ParseException {
                 switch (n) {
                     case 1: {
-                        bookType();
+                        admin.getAllBooks();
                         break;
                     }
                     case 2: {
-                        System.out.print("Enter book's name:");
-                        String Bname= sc.nextLine();
+                        findBooks();
                         break;
                     }
                     case 3: {
@@ -37,7 +36,7 @@ public class CustomerManagement {
                         break;
                     }
                     case 4: {
-                        bokkPrice();
+                        bookPrice();
                         break;
                     }
                     case 5: {
@@ -47,66 +46,46 @@ public class CustomerManagement {
                     }
                 }
             }
+
+            
         };
         m.run();
     }
-
-    public void bookType() throws ParseException {
-        String bookType[] = { "Thieu Nhi", "Khoa Hoc", "Lich Su", "Kinh Di", "Quay Lai" };
-
-        Menu m;
-        m = new Menu("Choose type", bookType) {
+    private void findBooks() {
+        String[] mc = new String[] { "Search By TYpe","Search By Name", "Search By author","Search buy Price", "Search By Year"};
+        enu menu = new Menu("Book Searching",mc ){
+            ArrayList<BuyBook> result = new ArrayList<>();
             @Override
             public void execute(int n) throws ParseException {
                 switch (n) {
-                    case 1: {
+                    case 1:
+                         String type= getValue("Enter the type of book you want to search for");
+                         result = admin.searchBuyBook1(b -> ((BuyBook) b).getBookType().equalsIgnoreCase(type));
                         break;
-                    }
-                    case 2: {
+                    case 2:
+                        String name = getValue("Enter the name of book you want to search for");
+                         result = admin.searchBuyBook1(b -> ((BuyBook) b).getName().equalsIgnoreCase(type));
                         break;
-                    }
-                    case 3: {
+                    case 3 :
+                        String author = getValue("Enter the name of book you want to search for");
+                         result = admin.searchBuyBook1(b -> ((BuyBook) b).getBookName().equalsIgnoreCase(type));
                         break;
-                    }
-                    case 4: {
+                    case 4 : 
                         break;
-                    }
-                    case 5: {
-                        cusMenu();
+                    case 5 :
+                        String year = getValue("Enter Name of the ")
                         break;
-                    }
+                    default: System.out.println("Invalid choice. Please try again.");
                 }
             }
-        };
-        m.run();
-    }
-    public void bokkPrice() throws ParseException{
-        String bookPrice[] = {"20k -> 50k","50k -> 70k","70k -> 100k","Tren 100k","Quay lai"};
-
-        Menu m;
-        m = new Menu("Choose type", bookPrice) {
-            @Override
-            public void execute(int n) throws ParseException {
-                switch (n) {
-                    case 1: {
-                        break;
-                    }
-                    case 2: {
-                        break;
-                    }
-                    case 3: {
-                        break;
-                    }
-                    case 4: {
-                        break;
-                    }
-                    case 5: {
-                        cusMenu();
-                        break;
-                    }
-                }
+            };
+            menu.run();
             }
-        };
-        m.run();
+    
+    
+    
+    private String getValue(String s) {
+        System.out.println(s);
+        return scanner.nextLine().trim();
     }
 }
