@@ -7,6 +7,7 @@ import Model.RentBook;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,17 +20,18 @@ import java.util.function.Predicate;
 
 
 public class CustomerManage  {
-    ArrayList<Customer> cuslist;
-    ArrayList<BuyBook> Buylist;
-    public static ArrayList<RentBook> Rentlist;
-    public CustomerManage() {
+    private ArrayList<Customer> cuslist;
+    private  ArrayList<BuyBook> Buylist;
+    private ArrayList<RentBook> Rentlist;
+    private Admin admin = new Admin();
+    public CustomerManage() throws FileNotFoundException {
         cuslist = new ArrayList<>();
         Buylist= new ArrayList<>();
         Rentlist=new ArrayList<>();
         
-                
     }
     
+
     public void deleteIDBook(String bookid) throws ParseException {
           Iterator<BuyBook> iterator = Buylist.iterator();
     boolean found = false;
@@ -49,8 +51,12 @@ public class CustomerManage  {
     public void addcusID(Customer c) {
         cuslist.add(c);
     }
-    public void addBooktoBuy(BuyBook bb) {
-        Buylist.add(bb);
+    public ArrayList<BuyBook> addBooktoBuy(String id) {
+        Buylist = admin.searchBuyBook1(p -> ((BuyBook)p).getBookID().equalsIgnoreCase(id));
+        for (BuyBook b : admin.getBbooklist()){
+           Buylist.add(b);
+        }
+        return Buylist;
     }
     public void addBooktoRent(RentBook rb) {
         Rentlist.add(rb);
@@ -110,6 +116,7 @@ public class CustomerManage  {
             System.out.println(rb.getRentPrice());
         }
     }
+    
 
    
     public void BuyNum(BuyBook bb) {

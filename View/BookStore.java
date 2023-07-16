@@ -21,21 +21,14 @@ import java.util.List;
 import java.util.Scanner;
 public class BookStore<T> {
     static Scanner scanner = new Scanner(System.in);
-    static Admin admin = new Admin();
+    private Admin admin = new Admin();
     private final CustomerManage cm = new CustomerManage();
-    public BookStore() throws IOException {
-        try {
-        admin.addReadObject("RentCustomer.txt");
-        admin.addReadObject("BuyCustomer.txt");
-        admin.addReadObject("BuyBook.txt");
-        admin.addReadObject("RentBook.txt");
-        cm.addRbooklist();
-        } catch (NumberFormatException | ParseException ex) {
-            ex.printStackTrace();
-        }
+    private final CustomerManagement cm1 = new CustomerManagement();
+    public BookStore() throws IOException , ParseException {
+       
     }
     public void Menu() throws ParseException {
-        String[] mc = { "admin MENU", "CUSTOMER MENU", };
+        String[] mc = { "ADMIN MENU", "CUSTOMER MENU" };
         Menu m = new Menu("====== MENU =====", mc) {
             @Override
             public void execute(int n) throws ParseException {
@@ -44,7 +37,9 @@ public class BookStore<T> {
                         AdminMenu();
                         break;
                     case 2:
-                        // adminMenu();
+                        cm1.run();
+                        break;
+                    default:
                         break;
                 }
             }
@@ -130,7 +125,7 @@ public class BookStore<T> {
                     switch (n) {
                         case 1:
                             String name = getValue("Enter name: ");
-                            bl = admin.searchBuyBook1(b -> ((BuyBook) b).getBookName().equalsIgnoreCase(name));
+                            bl = admin.searchBuyBook1(b -> (b).getBookName().equalsIgnoreCase(name));
                             break;
                         case 2:
                             String type = getValue("Enter type: ");
@@ -138,7 +133,7 @@ public class BookStore<T> {
                             break;
                         case 3:
                             String aname = getValue("Enter Author name: ");
-                            bl = admin.searchBuyBook1(b -> ((BuyBook) b).getName().equalsIgnoreCase(aname));
+                            bl = admin.searchBuyBook1(b -> ( b).getName().equalsIgnoreCase(aname));
                             break;
                         default:
                             System.out.println("Invalid choice. Please try again.");
@@ -254,7 +249,7 @@ private void writeData(){
 }
     
 
-    public static void addBook() throws ParseException  {
+    public  void addBook() throws ParseException  {
         System.out.println(" +----ADDING BOOK----+");
         System.out.println("Enter book type: ");
         String type = scanner.nextLine();

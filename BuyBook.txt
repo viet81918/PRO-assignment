@@ -1,3 +1,3 @@
-Lich Su;Lich Su Viet Nam; Dao Duy Anh;10;120.000; 05/05/1949;2; Sach trinh bay nhung chi tiet lich su cua Viet Nam qua nhieu thoi ki mot cach chi tiet
-Kinh Di;IT;Stephen King;15;210.000; 02/03/1986;3; Cuon sach co vo so tinh tiet ron toc gay, khien ban khong the roi mat khi doc
-Kinh Di; Slient hill; Stephen King;15;210.000; 02/03/1986;1; Cuon sach co vo so tinh tiet ron toc gay, khien ban khong the roi mat khi doc
+Lich Su;Lich Su Viet Nam;Dao Duy Anh;10;120.000;05/05/1949;2;Sach trinh bay nhung chi tiet lich su cua Viet Nam qua nhieu thoi ki mot cach chi tiet
+Kinh Di;IT;Stephen King;15;210.000;02/03/1986;3;Cuon sach co vo so tinh tiet ron toc gay, khien ban khong the roi mat khi doc
+Kinh Di;Slient hill;Stephen King;15;210.000;02/03/1986;1;Cuon sach co vo so tinh tiet ron toc gay, khien ban khong the roi mat khi doc

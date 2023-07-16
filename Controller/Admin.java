@@ -3,6 +3,7 @@ package Controller;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -27,18 +28,40 @@ import View.BookStore;
 import Controller.CustomerManage;
 public class Admin {
     static Scanner scanner = new Scanner(System.in);
-    private static ArrayList<RentCustomer> Rcuslist;
+    private  ArrayList<RentCustomer> Rcuslist;
     private ArrayList<BuyCustomer> Bcuslist;
-    private ArrayList<BuyBook> Bbooklist  ;
+    private  ArrayList<BuyBook> Bbooklist  ;
     private ArrayList<RentBook> Rbooklist ;
     private ArrayList<String> bookReview ;
-    public  Admin (){
+    public  Admin () {
     Rcuslist = new ArrayList<>();
     Bcuslist = new ArrayList<>();
      Bbooklist = new ArrayList<>();
      Rbooklist = new ArrayList<>();
      bookReview = new ArrayList<>();
+     try {
+        addReadObject("RentCustomer.txt");
+        addReadObject("BuyCustomer.txt");
+        addReadObject("BuyBook.txt");
+        addReadObject("RentBook.txt");
+        } catch (NumberFormatException | ParseException ex) {
+            ex.printStackTrace();
+        }
+}
+
+
+
+    public ArrayList<BuyBook> getBbooklist() {
+        return Bbooklist;
     }
+
+
+
+    public void setBbooklist(ArrayList<BuyBook> bbooklist) {
+        Bbooklist = bbooklist;
+    }
+
+
 
     public void addReadObject(String fileName) throws NumberFormatException, ParseException {
         String path = System.getProperty("user.dir") + File.separator + fileName;
@@ -83,6 +106,33 @@ public class Admin {
         }
     }
 
+    public void readFile(String p) throws FileNotFoundException, ParseException {
+
+        // Create a Scanner object to read the text file.
+        File file = new File(p);
+        Scanner scanner = new Scanner(file);
+
+        // Iterate through the text file, one line at a time.
+        while (scanner.hasNextLine()) {
+            // Get the line from the file.
+            String line = scanner.nextLine();
+
+            // Split the line into the person's name and ID.
+            String[] tokens = line.split(",");
+            String id = tokens[0];
+            String name=tokens[1];
+            String phone=tokens[2];
+           // SimpleDateFormat df=new SimpleDateFormat("dd/mm/yyyy");
+            int dob=Integer.parseInt(tokens[3]);
+            double a = Double.parseDouble(tokens[4]);
+            Date date = parseDate(tokens[5]);
+            int b =Integer.parseInt(tokens[6]);
+            String c = tokens[7];
+            // Create a new Person object and add it to the ArrayList.
+            BuyBook d = new BuyBook(id,name,phone,dob,a,date,b,c);
+            Bbooklist.add(d);
+        }
+    }
     private void addRbooklist(BufferedReader reader) throws IOException, NumberFormatException, ParseException {
         String line;
         while ((line = reader.readLine()) != null) {
@@ -257,6 +307,33 @@ public class Admin {
         }
         return buybookfind;
     }
+    public ArrayList<BuyBook> searchBuyBookByPriceRange1(double minPrice, double maxPrice) {
+        ArrayList<BuyBook> buyBooksInRange = new ArrayList<>();
+        for (BuyBook book : Bbooklist) {
+            if (book.getPrice() >= minPrice && book.getPrice() <= maxPrice) {
+                buyBooksInRange.add(book);
+            }
+        }
+        return buyBooksInRange;
+    }
+    public ArrayList<BuyBook> searchBuyBookByPriceRange2(double minPrice) {
+        ArrayList<BuyBook> buyBooksInRange = new ArrayList<>();
+        for (BuyBook book : Bbooklist) {
+            if (book.getPrice() >= minPrice) {
+                buyBooksInRange.add(book);
+            }
+        }
+        return buyBooksInRange;
+    }
+    public ArrayList<BuyBook> searchBuyBookByPriceRange3(double maxPrice) {
+        ArrayList<BuyBook> buyBooksInRange = new ArrayList<>();
+        for (BuyBook book : Bbooklist) {
+            if (book.getPrice() <= maxPrice) {
+                buyBooksInRange.add(book);
+            }
+        }
+        return buyBooksInRange;
+    }
 
     public  ArrayList<String> readBookReview() throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader("Review.txt"))) {
@@ -270,7 +347,7 @@ public class Admin {
         }
         return bookReview;
     }
-    public void writeBookReview(ArrayList<String> bookReview) throws IOException {
+    public void writeBookReview() throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("Review.txt"))) {
             for (String data : bookReview) {
                 writer.write(data);
@@ -278,12 +355,22 @@ public class Admin {
             }
         }
     }
+    public void DisplayReviewByID(String id){
+        ArrayList<BuyCustomer> result1 = new ArrayList<>();
+        result1 = searchBuyCustomer(p -> ((BuyCustomer)p).getID().equals(id));
+        ArrayList<RentCustomer> result2 = new ArrayList<>();
+        result2 = searchRentCustomer(p -> ((BuyCustomer)p).getID().equals(id));
+        for ( BuyCustomer bc : result1){
+            System.out.println(bc.getReview());}
+        for ( RentCustomer rc : result2){
+            System.out.println(rc.getReview());}
+    }
 
-    public void addBookReview(ArrayList<String> bookReview, String bookName, String review) {
+    public void addBookReview( String bookName, String review) {
         String data = bookName + ";" + review;
         bookReview.add(data);
     }
-    public void printBookReview(ArrayList<String> bookReview) {
+    public void printBookReview() {
             for (String data : bookReview) {
             System.out.println(data);
         }
@@ -311,9 +398,29 @@ public class Admin {
             }
         }
     }
-    
-
-
+    public void  writeReviewforCustomer(String id, String review){
+        ArrayList<BuyCustomer> result1 = new ArrayList<>();
+        result1 = searchBuyCustomer(p -> ((BuyCustomer)p).getID().equals(id));
+        ArrayList<RentCustomer> result2 = new ArrayList<>();
+        result2 = searchRentCustomer(p -> ((BuyCustomer)p).getID().equals(id));
+        for ( BuyCustomer bc : result1){
+                  bc.setReview(bc.getReview()+","+ review); }             
+        for ( RentCustomer rc : result2){
+            rc.setReview(rc.getReview()+","+ review) ; }
+        }
+    public void WritereviewforBook(String id,String review){
+        ArrayList<BuyBook> result1 = new ArrayList<>();
+        result1 = searchBuyBook1(p -> ((BuyBook)p).getBookID().equals(id));
+        ArrayList<RentBook> result2 = new ArrayList<>();
+        result2 = searchRentBook1(p -> ((RentBook)p).getBookID().equals(id));
+        for ( BuyBook bc : result1){
+            bc.setReview(bc.getReview()+","+ review) ; 
+             }
+            for ( RentBook rc : result2){
+                rc.setReview(rc.getReview()+","+ review) ; 
+                addBookReview(rc.getName(), review);
+            }
+    }
     private  Date parseDate(String dateStr) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.parse(dateStr);

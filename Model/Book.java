@@ -119,7 +119,7 @@ public abstract class Book  {
                 " | Book's Name: " + BookName +
                 " | Books in storage: " + BookNumber +
                 " | Author's Name: " + AuthorName +  
-                " | Book ID: " + BookID + 
+                " | Book ID: " + getBookID() + 
                 " | Books's Price : " + Price +
                 " | Day of production: " + dobString + 
                 " | Customer's review: " + Review 
