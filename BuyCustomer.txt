@@ -1,2 +1,2 @@
-KH001;2;Tiem sach Viet Nguyen co chat luong phuc vu nhu cai dau buoi ;2;190000
+KH001;2;Tiem sach Viet Nguyen co chat luong phuc vu 5* ;2;190000
 KH003;1; Se ung ho shop trong thoi gian toi;1;240000

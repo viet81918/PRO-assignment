@@ -1,28 +1,27 @@
 package Model;
 
-
-public abstract class Customer {
+public  class Customer {
     private String ID;
     private String Review;
-    private  int  BookNumber;
-    
-    
-    public Customer(){
+    private int BookNumber;
+
+    public Customer() {
         super();
     }
+
     public Customer(String ID) {
         super();
-        this.ID=ID;
+        this.ID = ID;
     }
-    
 
-    public Customer(String ID, int BookNumber,String Review) {
+    public Customer(String ID, int BookNumber, String Review) {
         super();
         this.ID = ID;
-        this.BookNumber=BookNumber;
-        this.Review=Review;
-             
+        this.BookNumber = BookNumber;
+        this.Review = Review;
+
     }
+
     public String getID() {
         return ID;
     }
@@ -36,24 +35,21 @@ public abstract class Customer {
     }
 
     public void setBookNumber(int BookNumber) {
-        this.BookNumber=BookNumber;
+        this.BookNumber = BookNumber;
     }
 
-    
-
-    public String getReview(){
+    public String getReview() {
         return Review;
     }
-    
-    public void setReview(String Review){
-        this.Review=Review;
+
+    public void setReview(String Review) {
+        this.Review = Review;
     }
 
-   @Override
+    @Override
     public String toString() {
-    return  "| ID: " + ID +
-            "| Number of books used: " + BookNumber +
-            "| Customer's review: " + Review ;
+        return "| ID: " + ID +
+                "| Number of books used: " + BookNumber +
+                "| Customer's review: " + Review;
     }
 }
-
